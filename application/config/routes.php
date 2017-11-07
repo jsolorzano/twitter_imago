@@ -79,38 +79,6 @@ $route['profile_delete/(:num)'] = 'CPerfil/delete/$1';
 $route['users'] = 'CUser';
 $route['users_register'] = 'CUser/register';
 $route['users_edit/(:num)'] = 'CUser/edit/$1';
-/*   Franchises */
-$route['franchises'] = 'CFranchises';
-$route['franchises/register'] = 'CFranchises/register';
-$route['franchises/edit/(:num)'] = 'CFranchises/edit/$1';
-$route['franchises/delete/(:num)'] = 'CFranchises/delete/$1';
-/*   Services */
-$route['services'] = 'CServices';
-$route['services/register'] = 'CServices/register';
-$route['services/edit/(:num)'] = 'CServices/edit/$1';
-$route['services/delete/(:num)'] = 'CServices/delete/$1';
-/*   Product */
-$route['product'] = 'CProduct';
-$route['product/register'] = 'CProduct/register';
-$route['product/edit/(:num)'] = 'CProduct/edit/$1';
-$route['product/delete/(:num)'] = 'CProduct/delete/$1';
-/*   Order */
-$route['order'] = 'COrder';
-$route['order/register'] = 'COrder/register';
-$route['order/edit/(:num)'] = 'COrder/edit/$1';
-$route['order/delete/(:num)'] = 'COrder/delete/$1';
-/*   clients */
-$route['clients'] = 'CClient';
-$route['clients/register'] = 'CClient/register';
-$route['clients/edit/(:num)'] = 'CClient/edit/$1';
-$route['clients/delete/(:num)'] = 'CClient/delete/$1';
-$route['clients/ajax_client'] = 'CClient/ajax_client';
-$route['confirm_mail'] = 'CTiendas/validar_mail';
-/*   Assignment */
-$route['assignment'] = 'CAssignment';
-$route['assignment/register'] = 'CAssignment/register';
-$route['assignment/edit/(:num)'] = 'CAssignment/edit/$1';
-$route['assignment/delete/(:num)'] = 'CAssignment/delete/$1';
 /*   Menús */
 $route['menus'] = 'CMenus';
 $route['menus/register'] = 'CMenus/register';
@@ -135,41 +103,13 @@ $route['productos_json4'] = 'CProductos/ajax_productos4';
 $route['productos/register'] = 'CProductos/register';
 $route['productos/edit/(:num)'] = 'CProductos/edit/$1';
 $route['productos/delete/(:num)'] = 'CProductos/delete/$1';
-/*   Tiendas virtuales */
-$route['tiendasv'] = 'CTiendasVirtuales';
-$route['tiendasv/register'] = 'CTiendasVirtuales/register';
-$route['tiendasv/edit/(:num)'] = 'CTiendasVirtuales/edit/$1';
-$route['tiendasv/delete/(:num)'] = 'CTiendasVirtuales/delete/$1';
-/*   Tiendas*/
-$route['tiendas'] = 'CTiendas';
-$route['tiendas/register'] = 'CTiendas/register';
-$route['tiendas/edit/(:num)'] = 'CTiendas/edit/$1';
-$route['tiendas/delete/(:num)'] = 'CTiendas/delete/$1';
-/*   Aplicaciones */
-$route['aplicaciones'] = 'CAplicaciones';
-$route['aplicaciones/register'] = 'CAplicaciones/register';
-$route['aplicaciones/edit/(:num)'] = 'CAplicaciones/edit/$1';
-$route['aplicaciones/delete/(:num)'] = 'CAplicaciones/delete/$1';
-/*   Colas */
-$route['colas'] = 'CColas/index_detalles';
-$route['colas/update_status'] = 'CColas/update_status';
-$route['colas/register'] = 'CColas/register';
-$route['colas/edit/(:num)'] = 'CColas/edit/$1';
-$route['colas/delete/(:num)'] = 'CColas/delete/$1';
-/*   Update prices M3 */
-$route['update_prices'] = 'CUpdateM3';
-$route['update_prices_m3'] = 'CUpdateM3/update_prices';
+
+/*   Bandeja de entrada */
+$route['bandeja_entrada'] = 'CBandejaEntrada/index';
+$route['entrada_json'] = 'CBandejaEntrada/ajax_entrada';
+
 /*assets*/
 $route['assets/(:any)'] = 'assets/$1';
-// APIs de tiendas virtuales
-$route['mercado/update'] = 'CApis/mlibre';
-$route['mercado/update_singles'] = 'CApis/mlibre_singles';
-$route['mercado/cola'] = 'CApis/cola_estatus';
-$route['mercado/cancelar_cola'] = 'CApis/cancelar_cola';
-$route['mercado/cola'] = 'CApis/cola_estatus';
-$route['olx/update'] = 'CApis/mlibre';
-$route['prestashop/update'] = 'CApis/mlibre';
-$route['product/get_json/(:num)'] = 'CApis/product/$1';
 
 // Pruebas
 $route['enviar_mail'] = 'CPruebas/enviar_mail';
