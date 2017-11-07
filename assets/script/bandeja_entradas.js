@@ -37,20 +37,90 @@ $(document).ready(function(){
         ]
     });
     
+	// Función para cambiar un twitter a otra bandeja según la opción seleccionada en su respectivo combo
+	$("table#tab_entradas").on('change', 'select.cambiar', function (e) {
+		
+		e.preventDefault();
+		
+		var id = this.getAttribute('id');
+		id = id.split(";");
+		id = id[0];  // Id de la cola
+		var estatus_actual = this.getAttribute('id');
+		estatus_actual = estatus_actual.split(";");
+		estatus_actual = estatus_actual[1];  // Estatus actual de la cola
+		var select_actual = $(this);  // Combo actualmente seleccionado
+		var nueva_bandeja = $(this).val();  // Bandeja nueva para el tweet
+		
+		//~ alert("Id: "+id+" | Nueva bandeja: "+nueva_bandeja);
+		
+		swal({
+            title: "Cambiar de bandeja",
+            text: "¿Está seguro de asignar el twit a otra bandeja?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Asignar",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+        function(isConfirm){
+            if (isConfirm) {
+             
+                $("#modal_detalles").modal('show');
+                $("#id_tweet").val(id);
+                $("#nueva_bandeja").val(nueva_bandeja);
+                
+            }else{
+				
+				// Si cancelamos el cambio de estatus, fijamos el select al estatus inicial
+				select_actual.val('0');
+			
+			} 
+        });
+		
+	});
+	
+	// Función para cambiar un twitter a otra bandeja según la opción seleccionada en su respectivo combo
+	$("#asignar").on('click', function (e) {
+		
+		if($("#detalles").val().trim() == ''){
+			
+			swal("Disculpe,", "debe indicar los detalles de la asignación");
+			$("#detalles").focus();
+			
+		}else{
+			
+			$.post(base_url+'entrada/cambiar_bandeja', {'id':$("#id_tweet").val(), 'nueva_bandeja':$("#nueva_bandeja").val(), 'mensaje':$("#detalles").val()}, function (response) {
+
+				if (response['response'] == "error") {
+				   
+					swal({
+						title: "Disculpe,",
+						text: "Ha ocurrido un error durante la asignación, por favor contacte con su administrador.",
+						type: "warning" 
+					},
+					function(){
+						// Si hay algún error, fijamos el select al estatus inicial
+						select_actual.val('0');
+					});
+					
+				}else{
+					 swal({ 
+					   title: "Asignación a nueva bandeja",
+						text: "Asignación realizada con éxito",
+						 type: "success" 
+					   },
+					   function(){
+						 window.location.href = base_url+'bandeja_entrada';
+					 });
+				}
+			}, 'json');
+		
+		}
+	
+		
+		
+	});
 	
 });
-
-// Función para referenciar del precio en bolívares al cambiar el precio en dólares de algún producto
-function referenciar(id_input_dl){
-	var precio_dolar = $("#precio_dolar").val();  // Capturamos el precio del dólar previamente cargado en el campo oculto 'precio_dolar'
-	//~ var precio_dolar = 22938.23;  // Prueba con valor estático
-	
-	var input_dolar = $("#"+id_input_dl).val();  // Capturamos el precio en dólares del producto modificado
-	// Preparamos el input del precio en bolívares
-	var id_input_bolivar = id_input_dl.replace("_dl","");
-	var input_bolivar = $("#"+id_input_bolivar);
-	
-	// Calculamos el nuevo precio y lo asinamos al input de monto en bolívares correspondiente al producto
-	var valor_referencial = parseFloat(input_dolar) * precio_dolar;
-	input_bolivar.val(valor_referencial.toFixed(2));
-}

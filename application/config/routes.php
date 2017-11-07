@@ -107,6 +107,7 @@ $route['productos/delete/(:num)'] = 'CProductos/delete/$1';
 /*   Bandeja de entrada */
 $route['bandeja_entrada'] = 'CBandejaEntrada/index';
 $route['entrada_json'] = 'CBandejaEntrada/ajax_entrada';
+$route['entrada/cambiar_bandeja'] = 'CBandejaEntrada/cambio_bandeja';
 
 /*assets*/
 $route['assets/(:any)'] = 'assets/$1';

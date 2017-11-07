@@ -90,6 +90,33 @@ class MBandejaEntrada extends CI_Model {
 		$this->db->where('b_e.status =', 1);
 		return $this->db->count_all_results();
 	}
+	
+	// Método público para registrar un tweet en una determinada tabla de bandeja x
+    public function insert($tabla, $datos) {
+        
+		$result = $this->db->insert($tabla, $datos);
+		return $result;
+            
+    }
+    
+    // Método público para consultar los datos de un tweet según su id
+    public function obtenerTweet($tweet_id) {
+        $this->db->where('id', $tweet_id);
+        $query = $this->db->get('bandeja_entrada');
+        if ($query->num_rows() > 0)
+            return $query->result();
+        else
+            return $query->result();
+    }
+	
+	// Método público para actualizar el estatus de un tweet en la bandeja de donde viene
+    public function update_status($tabla, $datos) {
+		
+		$result = $this->db->where('id', $datos['id']);
+		$result = $this->db->update($tabla, $datos);
+		return $result;
+		
+    }
 
 }
 ?>
