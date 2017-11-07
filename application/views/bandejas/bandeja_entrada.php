@@ -41,6 +41,48 @@
     </div>
 </div>
 
+<!-- Modal para descripción del movimiento -->
+<div class="modal fade" id="modal_detalles">
+   <div class="modal-dialog">
+	  <div class="modal-content">
+		 <div class="modal-header" style="background-color:#1ab394">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title" style="color:#ffffff">
+			   <center>
+				<span class="glyphicon glyphicon-search"></span>
+				&nbsp;Indique los detalles de la asignación
+			   </center>
+			</h4>
+		 </div>
+		 <div class="modal-body">
+			<form id="f_detalles" name="f_detalles" action="" method="post">
+			   <div class="form-group">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label style="font-weight:bold;">Detalles</label>
+							<textarea class="form-control" id="detalles"></textarea>
+							<input type="hidden" id="id_tweet">
+							<input type="hidden" id="nueva_bandeja">
+						</div>
+					</div>
+					</br></br>
+					</br></br>
+					<div class="col-sm-12" align="right">
+						<span class="input-btn">
+							<button class="btn btn-primary" type="button" id="asignar">
+								Asignar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+							</button>
+						</span>
+					</div>
+					</br></br>
+			   </div>
+			</form>
+		 </div>
+		 
+	  </div>
+   </div>
+</div>
+<!-- Cierre Modal para descripción del movimiento -->
 
  <!-- Page-Level Scripts -->
 <script src="<?php echo assets_url(); ?>script/bandeja_entradas.js"></script>
