@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Servicios</h2>
+        <h2>Bandeja asistencial</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="<?php echo base_url() ?>home">Inicio</a>
             </li>
             <li class="active">
-                <strong>Servicios</strong>
+                <strong>Bandeja asistencial</strong>
             </li>
         </ol>
     </div>
@@ -14,48 +14,25 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            <a href="<?php echo base_url() ?>services/register">
-            <button class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-plus"></i> Agregar</button></a>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de Servicios </h5>
+                    <h5>Bandeja asistencial </h5>
+                    <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <table id="tab_services" class="table table-striped table-bordered table-hover dataTables-example" >
+                        <table id="tab_asistencial" class="table table-striped table-bordered dt-responsive table-hover dataTables-example" >
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Imagen</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
+                                    <th>Solicitante</th>
+                                    <th>Mensaje</th>
+                                    <th>Fecha</th>
+                                    <th>Asignación</th>
+                                    <th>Bot</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php $i = 1; ?>
-                                <?php foreach ($listar as $perfil) { ?>
-                                    <tr style="text-align: center">
-                                        <td>
-                                            <?php echo $i; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $perfil->name; ?>
-                                        </td>
-                                        <td>
-                                            <img src="<?php echo base_url().'assets/public/img/demos/medical/'.$perfil->icon ?>" style="width:50px;height:50px;"/> 
-                                        </td>
-                                        <td style='text-align: center'>
-                                            <a href="<?php echo base_url() ?>services/edit/<?= $perfil->id; ?>" title="Editar" style='color: #1ab394'><i class="fa fa-edit fa-2x"></i></a>
-                                        </td>
-                                        <td style='text-align: center'>
-                                            
-                                            <a class='borrar' id='<?php echo $perfil->id; ?>' style='color: #1ab394' title='Eliminar'><i class="fa fa-trash-o fa-2x"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php $i++ ?>
-                                <?php } ?>
-                            </tbody>
+							
                         </table>
                     </div>
                 </div>
@@ -64,94 +41,48 @@
     </div>
 </div>
 
+<!-- Modal para descripción del movimiento -->
+<div class="modal fade" id="modal_detalles">
+   <div class="modal-dialog">
+	  <div class="modal-content">
+		 <div class="modal-header" style="background-color:#1ab394">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title" style="color:#ffffff">
+			   <center>
+				<span class="glyphicon glyphicon-search"></span>
+				&nbsp;Indique los detalles de la asignación
+			   </center>
+			</h4>
+		 </div>
+		 <div class="modal-body">
+			<form id="f_detalles" name="f_detalles" action="" method="post">
+			   <div class="form-group">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label style="font-weight:bold;">Detalles</label>
+							<textarea class="form-control" id="detalles"></textarea>
+							<input type="hidden" id="id_tweet">
+							<input type="hidden" id="nueva_bandeja">
+						</div>
+					</div>
+					</br></br>
+					</br></br>
+					<div class="col-sm-12" align="right">
+						<span class="input-btn">
+							<button class="btn btn-primary" type="button" id="asignar">
+								Asignar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+							</button>
+						</span>
+					</div>
+					</br></br>
+			   </div>
+			</form>
+		 </div>
+		 
+	  </div>
+   </div>
+</div>
+<!-- Cierre Modal para descripción del movimiento -->
 
  <!-- Page-Level Scripts -->
-<script>
-$(document).ready(function(){
-     $('#tab_services').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        dom: '<"html5buttons"B>lTfgitp',
-        buttons: [
-            { extend: 'copy'},
-            {extend: 'csv'},
-            {extend: 'excel', title: 'ExampleFile'},
-            {extend: 'pdf', title: 'ExampleFile'},
-
-            {extend: 'print',
-             customize: function (win){
-                    $(win.document.body).addClass('white-bg');
-                    $(win.document.body).css('font-size', '10px');
-
-                    $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-            }
-            }
-        ],
-        "iDisplayLength": 5,
-        "iDisplayStart": 0,
-        "sPaginationType": "full_numbers",
-        "aLengthMenu": [5, 10, 15],
-        "oLanguage": {"sUrl": "<?= assets_url() ?>js/es.txt"},
-        "aoColumns": [
-            {"sClass": "registro center", "sWidth": "5%"},
-            {"sClass": "registro center", "sWidth": "20%"},
-            {"sClass": "registro center", "sWidth": "10%"},
-            {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
-            {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false}
-        ]
-    });
-             
-         // Validacion para borrar
-    $("table#tab_services").on('click', 'a.borrar', function (e) {
-        e.preventDefault();
-        var id = this.getAttribute('id');
-
-        swal({
-            title: "Borrar registro",
-            text: "¿Está seguro de borrar el registro?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Eliminar",
-            cancelButtonText: "Cancelar",
-            closeOnConfirm: false,
-            closeOnCancel: true
-          },
-        function(isConfirm){
-            if (isConfirm) {
-             
-                $.post('<?php echo base_url(); ?>services/delete/' + id + '', function (response) {
-
-                    if (response[0] == "e") {
-                       
-                         swal({ 
-                           title: "Disculpe,",
-                            text: "No se puede eliminar se encuentra asociado a un usuario",
-                             type: "warning" 
-                           },
-                           function(){
-                             
-                         });
-                    }else{
-                         swal({ 
-                           title: "Eliminar",
-                            text: "Registro eliminado con exito",
-                             type: "success" 
-                           },
-                           function(){
-                             window.location.href = '<?php echo base_url(); ?>services';
-                         });
-                    }
-                });
-            } 
-        });
-    });       
-});
-        
-</script>
+<script src="<?php echo assets_url(); ?>script/bandeja_asistencial.js"></script>
