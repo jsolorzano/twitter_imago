@@ -109,6 +109,28 @@ $route['bandeja_entrada'] = 'CBandejaEntrada/index';
 $route['entrada_json'] = 'CBandejaEntrada/ajax_entrada';
 $route['entrada/cambiar_bandeja'] = 'CBandejaEntrada/cambio_bandeja';
 
+/*   Bandeja política */
+$route['bandeja_politico'] = 'CBandejaPolitico/index';
+$route['politico_json'] = 'CBandejaPolitico/ajax_politico';
+$route['politico/cambiar_bandeja'] = 'CBandejaPolitico/cambio_bandeja';
+/*   Bandeja de operantes */
+$route['bandeja_operantes'] = 'CBandejaOperantes/index';
+$route['operantes_json'] = 'CBandejaOperantes/ajax_operantes';
+/*   Bandeja de oponentes */
+$route['bandeja_oponentes'] = 'CBandejaOponentes/index';
+$route['oponentes_json'] = 'CBandejaOponentes/ajax_oponentes';
+
+/*   Bandeja asistencial */
+$route['bandeja_asistencial'] = 'CBandejaAsistencial/index';
+$route['asistencial_json'] = 'CBandejaAsistencial/ajax_asistencial';
+$route['asistencial/cambiar_bandeja'] = 'CBandejaAsistencial/cambio_bandeja';
+/*   Bandeja de operantes */
+$route['bandeja_individuales'] = 'CBandejaIndividuales/index';
+$route['individuales_json'] = 'CBandejaOperantes/ajax_individuales';
+/*   Bandeja de oponentes */
+$route['bandeja_colectivos'] = 'CBandejaColectivos/index';
+$route['colectivos_json'] = 'CBandejaColectivos/ajax_colectivos';
+
 /*assets*/
 $route['assets/(:any)'] = 'assets/$1';
 
