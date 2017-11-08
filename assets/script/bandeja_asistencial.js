@@ -2,7 +2,7 @@ $(document).ready(function(){
 	// Capturamos la base_url
     var base_url = $("#base_url").val();
 	
-	var tabPolitico = $('#tab_asistencial').DataTable({
+	var tabAsistencial = $('#tab_asistencial').DataTable({
         //~ "paging": true,
         //~ "lengthChange": false,
         "autoWidth": false,

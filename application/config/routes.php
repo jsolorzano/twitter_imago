@@ -124,10 +124,10 @@ $route['oponentes_json'] = 'CBandejaOponentes/ajax_oponentes';
 $route['bandeja_asistencial'] = 'CBandejaAsistencial/index';
 $route['asistencial_json'] = 'CBandejaAsistencial/ajax_asistencial';
 $route['asistencial/cambiar_bandeja'] = 'CBandejaAsistencial/cambio_bandeja';
-/*   Bandeja de operantes */
+/*   Bandeja de individuales */
 $route['bandeja_individuales'] = 'CBandejaIndividuales/index';
 $route['individuales_json'] = 'CBandejaOperantes/ajax_individuales';
-/*   Bandeja de oponentes */
+/*   Bandeja de colectivos */
 $route['bandeja_colectivos'] = 'CBandejaColectivos/index';
 $route['colectivos_json'] = 'CBandejaColectivos/ajax_colectivos';
 
