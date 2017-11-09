@@ -131,6 +131,12 @@ $route['individuales_json'] = 'CBandejaIndividuales/ajax_individuales';
 $route['bandeja_colectivos'] = 'CBandejaColectivos/index';
 $route['colectivos_json'] = 'CBandejaColectivos/ajax_colectivos';
 
+/*   Perfil de Twitter */
+$route['twitters'] = 'CTwitter/index';
+$route['twitters_json'] = 'CTwitter/ajax_twitters';
+$route['twitters/view'] = 'CTwitter/view';
+
+
 /*assets*/
 $route['assets/(:any)'] = 'assets/$1';
 
