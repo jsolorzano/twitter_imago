@@ -36,55 +36,16 @@
                             </thead>
 							
                         </table>
+                        <!-- Campos ocultos de id y nombre del twitter -->
+                        <input type="hidden" id="id">
+						<input type="hidden" id="screen_name">
+						<input type="hidden" id="ruta_origen" value="twitters">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modal para indicar la cédula del usuario -->
-<div class="modal fade" id="modal_cedula">
-   <div class="modal-dialog">
-	  <div class="modal-content">
-		 <div class="modal-header" style="background-color:#1ab394">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title" style="color:#ffffff">
-			   <center>
-				<span class="glyphicon glyphicon-search"></span>
-				&nbsp;Indique la cédula del usuario
-			   </center>
-			</h4>
-		 </div>
-		 <div class="modal-body">
-			<form id="f_cedula" name="f_cedula" action="" method="post">
-			   <div class="form-group">
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label style="font-weight:bold;">Cédula</label>
-							<input type="form-control" id="cedula">
-							<input type="hidden" id="id">
-							<input type="hidden" id="screen_name">
-						</div>
-					</div>
-					</br></br>
-					</br></br>
-					<div class="col-sm-12" align="right">
-						<span class="input-btn">
-							<button class="btn btn-primary" type="button" id="ver">
-								Inspeccionar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
-							</button>
-						</span>
-					</div>
-					</br></br>
-			   </div>
-			</form>
-		 </div>
-		 
-	  </div>
-   </div>
-</div>
-<!-- Cierre Modal para indicar la cédula del usuario -->
 
  <!-- Page-Level Scripts -->
 <script src="<?php echo assets_url(); ?>script/twitters.js"></script>

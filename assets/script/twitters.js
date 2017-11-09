@@ -47,7 +47,7 @@ $(document).ready(function(){
 		$("#id").val(valor);
 		$("#screen_name").val('');
 		
-		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val();
+		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
     
@@ -59,7 +59,7 @@ $(document).ready(function(){
 		$("#id").val('');
 		$("#screen_name").val(valor);
 		
-		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val();
+		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	

@@ -117,9 +117,31 @@ $(document).ready(function(){
 				}
 			}, 'json');
 		
-		}
-	
+		}		
 		
+	});
+	
+	// Función para ver los datos de un twitter tomando en cuenta el valor del id
+	$("table#tab_entradas").on('click', 'a.verId', function (e) {
+		
+		var valor = this.innerHTML;
+		
+		$("#id").val(valor);
+		$("#screen_name").val('');
+		
+		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		
+	});
+    
+	// Función para ver los datos de un twitter tomando en cuenta el valor del screen_name
+	$("table#tab_entradas").on('click', 'a.verName', function (e) {
+		
+		var valor = this.innerHTML;
+		
+		$("#id").val('');
+		$("#screen_name").val(valor);
+		
+		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	
