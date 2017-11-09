@@ -58,6 +58,7 @@ class CTwitter extends CI_Controller {
 		
 		$twitter_id = $this->input->get('id');
 		$twitter_name = $this->input->get('screen_name');
+		$ruta_origen = $this->input->get('ruta');
 		
 		if($twitter_id == '' && $twitter_name == ''){
 			
@@ -94,6 +95,7 @@ class CTwitter extends CI_Controller {
 				'favorites_count' => $datos_twitter[0]->favorites_count,
 				'statuses_count' => $datos_twitter[0]->statuses_count,
 				'profile_image_url' => $datos_twitter[0]->profile_image_url,
+				'ruta_origen' => $ruta_origen,
 			);
 			
 			$this->load->view('base');

@@ -37,8 +37,8 @@ class CBandejaEntrada extends CI_Controller {
 			$select .="<option value='Asistencial'>Asistencial</option>";
 			$select .="</select>";
 			
-			$sub_array[] = $row->id;
-			$sub_array[] = $row->screen_name;
+			$sub_array[] = "<a class='verId'>".$row->id."</a>";
+			$sub_array[] = "<a class='verName'>".$row->screen_name."</a>";
 			$sub_array[] = $row->text;
 			$sub_array[] = $row->created_at;
 			$sub_array[] = $select;
