@@ -103,4 +103,19 @@ $(document).ready(function(){
 		
 	});
 	
+	
+	// Función para quitar un perfil de la cuenta en cuestión
+	$("table#tab_perfiles").on('click', 'a.ver', function (e) {
+		
+		var perfil_id = this.getAttribute('id');
+		perfil_id = perfil_id.split(";");
+		perfil_id = perfil_id[0];  // Id del perfil
+		var twitter_id = this.getAttribute('id');
+		twitter_id = twitter_id.split(";");
+		twitter_id = twitter_id[1];  // Id del twitter		
+             
+		window.location.href = base_url+'social_profile/ver?id_twitter='+twitter_id+'&id_perfil='+perfil_id+'&ruta='+$("#ruta_origen").val();
+		
+	});
+	
 });

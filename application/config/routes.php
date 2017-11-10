@@ -139,6 +139,8 @@ $route['twitters/view'] = 'CTwitter/view';
 /*   Perfiles Sociales */
 $route['social_profile'] = 'CPerfilSocial';
 $route['social_profile/register'] = 'CPerfilSocial/register';
+$route['social_profile/ver'] = 'CPerfilSocial/ver';
+$route['social_profile/edit'] = 'CPerfilSocial/edit';
 
 
 /*assets*/

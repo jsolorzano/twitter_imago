@@ -67,11 +67,22 @@ class CPerfilSocial extends CI_Controller {
     }
 	
 	// Método para editar
+    public function ver() {
+		
+		$this->load->view('base');
+        $data['id_perfil'] = $this->input->get('id_perfil');
+        $data['id_twitter'] = $this->input->get('id_twitter');
+        $data['ver'] = $this->MPerfilSocial->obtenerPerfil($data['id_perfil']);
+        $this->load->view('perfiles_sociales/ver', $data);
+		$this->load->view('footer');
+    }
+	
+	// Método para editar
     public function edit() {
 		
 		$this->load->view('base');
-        $data['id'] = $this->uri->segment(3);
-        $data['editar'] = $this->MPerfilSocial->obtenerServices($data['id']);
+        $data['id'] = $this->input->get('id_perfil');
+        $data['editar'] = $this->MPerfilSocial->obtenerPerfil($data['id']);
         $this->load->view('perfiles_sociales/editar', $data);
 		$this->load->view('footer');
     }
