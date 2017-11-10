@@ -110,4 +110,21 @@ class CTwitter extends CI_Controller {
 		
 	}
 	
+	
+	// Método para quitar un perfil de un twitter
+	public function quitar(){
+		
+		$perfil_id = $this->input->post('perfil_id');
+		$twitter_id = $this->input->post('twitter_id');
+		
+		$quitar = $this->MTwitter->quitar_perfil($perfil_id, $twitter_id);
+		
+		if($quitar){
+			
+			echo '{"response":"ok"}';
+			
+		}
+		
+	}
+	
 }

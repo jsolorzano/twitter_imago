@@ -160,6 +160,14 @@ class MTwitter extends CI_Model {
 		return $result;
 		
     }
+	
+	// Método público para desasociar un perfil de una cuenta de twitter
+    public function quitar_perfil($perfil_id, $twitter_id) {
+		
+		$result = $this->db->delete('twitter_perfil', array('perfil_id' => $perfil_id, 'twitter_id' => $twitter_id));
+		return $result;
+		
+    }
 
 }
 ?>

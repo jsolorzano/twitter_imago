@@ -126,7 +126,7 @@
 			<div class="project-list">
 				
 				<div class="table-responsive">
-					<table class="table table-hover footable table-stripped toggle-arrow-tiny">
+					<table id="tab_perfiles" class="table table-hover footable table-stripped toggle-arrow-tiny">
 						
 						<thead>
 							<tr>
@@ -171,9 +171,9 @@
 									<?php echo $perfil->direccion_centro_votacion; ?>
 								</td>
 								<td class="project-actions">
-									<a class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
-									<a class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-									<a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Quitar </a>
+									<a class="btn btn-white btn-sm ver" id="<?php echo $perfil->id.";".$id; ?>"><i class="fa fa-folder"></i> Ver </a>
+									<a class="btn btn-white btn-sm editar" id="<?php echo $perfil->id.";".$id; ?>"><i class="fa fa-pencil"></i> Editar </a>
+									<a class="btn btn-danger btn-sm quitar" id="<?php echo $perfil->id.";".$id; ?>"><i class="fa fa-trash"></i> Quitar </a>
 								</td>
 							</tr>
 							<?php $i++ ?>
