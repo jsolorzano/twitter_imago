@@ -48,13 +48,17 @@ class MPerfilSocial extends CI_Model {
     }
 
     // Public method to obtain the perfil by id
-    public function obtenerServices($id) {
+    public function obtenerPerfil($id) {
+		
         $this->db->where('id', $id);
+        
         $query = $this->db->get('perfil');
+        
         if ($query->num_rows() > 0)
             return $query->result();
         else
             return $query->result();
+            
     }
 
     // Public method to update a record  
