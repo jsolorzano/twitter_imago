@@ -70,7 +70,7 @@ $route['noticias'] = 'welcome/noticias';
 $route['contacto'] = 'welcome/contacto';
 $route['send_message'] = 'CMessages/add_message';
 
-/* perfiles */
+/* Perfiles */
 $route['profile'] = 'CPerfil';
 $route['profile_register'] = 'CPerfil/register';
 $route['profile_edit/(:num)'] = 'CPerfil/edit/$1';
@@ -135,6 +135,10 @@ $route['colectivos_json'] = 'CBandejaColectivos/ajax_colectivos';
 $route['twitters'] = 'CTwitter/index';
 $route['twitters_json'] = 'CTwitter/ajax_twitters';
 $route['twitters/view'] = 'CTwitter/view';
+
+/*   Perfiles Sociales */
+$route['social_profile'] = 'CPerfilSocial';
+$route['social_profile/register'] = 'CPerfilSocial/register';
 
 
 /*assets*/

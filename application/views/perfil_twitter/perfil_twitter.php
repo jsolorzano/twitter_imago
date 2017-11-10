@@ -1,3 +1,6 @@
+<!-- FooTable -->
+<link href="<?php echo assets_url('css/plugins/footable/footable.core.css');?>" rel="stylesheet">
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Twitter details</h2>
@@ -47,7 +50,7 @@
 								<?php echo $statuses_count; ?>
 							</span>
 							<div>
-								<small>statuses_count</small>
+								<small>Statuses</small>
 							</div>
 						</div>
 						<div class="col-md-2 forum-info">
@@ -95,9 +98,11 @@
 
 	<div class="ibox">
 		<div class="ibox-title">
-			<h5>All profiles assigned to this account</h5>
+			<h5>Todos los perfiles asignados a esta cuenta</h5>
 			<div class="ibox-tools">
-				<a class="btn btn-primary btn-xs" ng-click="crearNuevo()">Create new social profile</a>
+				<a class="btn btn-primary btn-xs" id="boton_vincular">
+				Crear nuevo perfil social
+				</a>
 			</div>
 		</div>
 		<div class="ibox-content">
@@ -119,35 +124,66 @@
 			</div>-->
 
 			<div class="project-list">
+				
+				<div class="table-responsive">
+					<table class="table table-hover footable table-stripped toggle-arrow-tiny">
+						
+						<thead>
+							<tr>
 
-				<table class="table table-hover">
-					<tbody>
-						<tr ng-repeat="empleado in empleados | filter: busqueda">
-							<td class="project-status">
-								<a href=""><img alt="image" class="img-circle" ng-src="{{config.carpeta_imagenes + empleado.imagen}}"></a>
-							</td>
-							<td class="project-title">
-								<a href="project_detail.html">{{empleado.nombre}}</a>
-								<br/>
-								<small>{{empleado.descripcion}}</small>
-							</td>
-							<td class="project-completion">
-								<small>Completion with: 48%</small>
-								<div class="progress progress-mini">
-									<div style="width: 48%;" class="progress-bar"></div>
-								</div>
-							</td>
-							<td class="project-people">
-								<span class="label label-primary">Active</span>
-							</td>
-							<td class="project-actions">
-								<a class="btn btn-white btn-sm" ng-click="verDetalles(empleado.id)"><i class="fa fa-folder"></i> View </a>
-								<a class="btn btn-white btn-sm" ng-click="editarDetalles(empleado.id)"><i class="fa fa-pencil"></i> Edit </a>
-								<a class="btn btn-danger btn-sm" ng-click="borrarEmpleado(empleado.id)"><i class="fa fa-trash"></i> Delete </a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+								<th data-toggle="true">Id</th>
+								<th data-hide="phone">Cédula y nombre</th>
+								<th data-hide="phone">Teléfono</th>
+								<th data-hide="phone">Celular</th>
+								<th data-hide="phone" >Correo</th>
+								<th data-hide="all" >Centro de votación</th>
+								<th data-hide="all" >Dirección del centro</th>
+								<th class="text-right" data-sort-ignore="true">Acciones</th>
+
+							</tr>
+						</thead>
+						
+						<tbody>
+							<?php $i = 1; ?>
+							<?php foreach ($perfiles as $perfil) { ?>
+							<tr>
+								<td class="project-status">
+									<?php echo $perfil->id; ?>
+								</td>
+								<td class="project-title">
+									<a href="project_detail.html"><?php echo $perfil->cedula; ?></a>
+									<br/>
+									<small><?php echo $perfil->nombre.' '.$perfil->apellido; ?></small>
+								</td>
+								<td class="project-title">
+									<?php echo $perfil->telefono; ?>
+								</td>
+								<td class="project-title">
+									<?php echo $perfil->celular; ?>
+								</td>
+								<td class="project-title">
+									<?php echo $perfil->correo; ?>
+								</td>
+								<td class="project-title">
+									<?php echo $perfil->centro_votacion; ?>
+								</td>
+								<td class="project-title">
+									<?php echo $perfil->direccion_centro_votacion; ?>
+								</td>
+								<td class="project-actions">
+									<a class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
+									<a class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+									<a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Quitar </a>
+								</td>
+							</tr>
+							<?php $i++ ?>
+							<?php } ?>
+						</tbody>
+						
+					</table>
+					
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -172,17 +208,18 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label style="font-weight:bold;">Cédula</label>
-							<input type="form-control" id="cedula">
-							<input type="hidden" id="id">
-							<input type="hidden" id="screen_name">
+							<input type="text" class="form-control" id="cedula">
+							<input type="hidden" id="id_twitter" value="<?php echo $id; ?>">
+							<input type="hidden" id="screen_name" value="<?php echo $screen_name; ?>">
+							<input type="hidden" id="ruta_origen" value="<?php echo $ruta_origen; ?>">
 						</div>
 					</div>
 					</br></br>
 					</br></br>
 					<div class="col-sm-12" align="right">
 						<span class="input-btn">
-							<button class="btn btn-primary" type="button" id="ver">
-								Inspeccionar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+							<button class="btn btn-primary" type="button" id="vincular">
+								Vincular&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
 							</button>
 						</span>
 					</div>
@@ -196,5 +233,8 @@
 </div>
 <!-- Cierre Modal para indicar la cédula del usuario -->
 
- <!-- Page-Level Scripts -->
+<!-- FooTable -->
+<script src="<?php echo assets_url('js/plugins/footable/footable.all.min.js');?>"></script>
+
+<!-- Page-Level Scripts -->
 <script src="<?php echo assets_url(); ?>script/twitter_view.js"></script>

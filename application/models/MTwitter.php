@@ -132,6 +132,25 @@ class MTwitter extends CI_Model {
             return $query->result();
             
     }
+    
+    
+    //Public method to obtain the tienda
+    public function perfiles_asociados($twitter_id) {
+		
+        $this->db->select('p.id, p.cedula, p.genero, p.nombre, p.apellido, p.telefono, p.celular, p.correo, p.centro_votacion, p.direccion_centro_votacion, p.facebook');
+		$this->db->from('twitter_perfil t_p');
+		$this->db->join('twitter t', 't.id = t_p.twitter_id');
+		$this->db->join('perfil p', 'p.id = t_p.perfil_id');
+        $this->db->where('t_p.twitter_id =', $twitter_id);
+		
+		$query = $this->db->get();
+		
+        if ($query->num_rows() > 0)
+            return $query->result();
+        else
+            return $query->result();
+            
+    }
 	
 	// Método público para actualizar el estatus de un tweet en la bandeja de donde viene
     public function update_status($tabla, $datos) {

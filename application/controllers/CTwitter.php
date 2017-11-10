@@ -81,6 +81,9 @@ class CTwitter extends CI_Controller {
 				$datos_twitter = $this->MTwitter->obtenerTwitter($twitter_name);
 			}
 			
+			// Buscamos los perfiles asociados a la cuenta y armamos una lista para enviarla a la vista también
+			$perfiles = $this->MTwitter->perfiles_asociados($twitter_id);
+			
 			// Armamos los datos a registrar del twitter
 			$data = array(
 				'id' => $datos_twitter[0]->id,
@@ -96,6 +99,7 @@ class CTwitter extends CI_Controller {
 				'statuses_count' => $datos_twitter[0]->statuses_count,
 				'profile_image_url' => $datos_twitter[0]->profile_image_url,
 				'ruta_origen' => $ruta_origen,
+				'perfiles' => $perfiles
 			);
 			
 			$this->load->view('base');
