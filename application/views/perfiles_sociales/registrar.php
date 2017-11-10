@@ -89,11 +89,11 @@
                                 <h3 class="m-t-none m-b">Datos de Votación</h3>
                                 <div class="form-group">
                                     <label>Centro de votación</label>
-                                    <textarea class="form-control" placeholder="Centro de votación" id="centro_votacion" name="centro_votacion"></textarea>
+                                    <textarea readonly="true" class="form-control" placeholder="Centro de votación" id="centro_votacion" name="centro_votacion"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Dirección del centro</label>
-                                    <textarea class="form-control" placeholder="Dirección del centro de votación" id="direccion_centro_votacion" name="direccion_centro_votacion"></textarea>
+                                    <textarea readonly="true" class="form-control" placeholder="Dirección del centro de votación" id="direccion_centro_votacion" name="direccion_centro_votacion"></textarea>
                                 </div>
                             </div>
                             
