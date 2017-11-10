@@ -81,43 +81,39 @@ class CPerfilSocial extends CI_Controller {
     public function edit() {
 		
 		$this->load->view('base');
-        $data['id'] = $this->input->get('id_perfil');
-        $data['editar'] = $this->MPerfilSocial->obtenerPerfil($data['id']);
+        $data['id_perfil'] = $this->input->get('id_perfil');
+        $data['id_twitter'] = $this->input->get('id_twitter');
+        $data['editar'] = $this->MPerfilSocial->obtenerPerfil($data['id_perfil']);
         $this->load->view('perfiles_sociales/editar', $data);
 		$this->load->view('footer');
     }
 	
 	// Método para actualizar
     public function update() {
-		if($_FILES['icon']['name'] != ''){
-			$datos = array(
-				'id' => $_POST['id'],
-				'name' => $_POST['name'],
-				'description' => $_POST['description'],
-				'icon' => $_FILES['icon']['name'],
-				'price' => $_POST['price'],
-				'status' => $_POST['status'],
-			);
-		}else{
-			$datos = array(
-				'id' => $_POST['id'],
-				'name' => $_POST['name'],
-				'description' => $_POST['description'],
-				'price' => $_POST['price'],
-				'status' => $_POST['status'],
-			);
-		}
+		
+		$datos = array(
+            'id' => $this->input->post('id_perfil'),
+            'cedula' => $this->input->post('cedula'),
+            'genero' => $this->input->post('genero'),
+            'nombre' => $this->input->post('nombre'),
+            'apellido' => $this->input->post('apellido'),
+            'fecha_nac' => $this->input->post('fecha_nac'),
+            'direccion_nac' => $this->input->post('direccion_nac'),
+            'direccion_viv' => $this->input->post('direccion_viv'),
+            'telefono' => $this->input->post('telefono'),
+            'celular' => $this->input->post('celular'),
+            'correo' => $this->input->post('correo'),
+            'centro_votacion' => $this->input->post('centro_votacion'),
+            'direccion_centro_votacion' => $this->input->post('direccion_centro_votacion'),
+            'facebook' => $this->input->post('facebook')
+        );
+		
         $result = $this->MPerfilSocial->update($datos);
+        
         if ($result) {
-			// Sección para el registro del archivo en la ruta establecida para tal fin (assets/public/img/demos/medical)
-			$ruta = getcwd();  // Obtiene el directorio actual en donde se esta trabajando
-			if($_FILES['icon']['name'] != ''){
-				if (move_uploaded_file($_FILES['icon']['tmp_name'], $ruta."/assets/public/img/demos/medical/".$_FILES['icon']['name'])) {
-					echo "El fichero es válido y se subió con éxito.\n";
-				} else {
-					echo "¡Posible ataque de subida de ficheros!\n";
-				}
-			}     
+			
+			echo '{"response":"ok"}';
+			    
         }
     }
     

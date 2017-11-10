@@ -151,7 +151,7 @@
 									<?php echo $perfil->id; ?>
 								</td>
 								<td class="project-title">
-									<a href="project_detail.html"><?php echo $perfil->cedula; ?></a>
+									<a ><?php echo $perfil->cedula; ?></a>
 									<br/>
 									<small><?php echo $perfil->nombre.' '.$perfil->apellido; ?></small>
 								</td>
