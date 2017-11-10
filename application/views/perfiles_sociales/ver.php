@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Nuevo Perfil Social</h5>
+                    <h5>Ver Perfil Social</h5>
                     <!-- Campo oculto que almacena el url base del proyecto -->
 					<input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
                 </div>

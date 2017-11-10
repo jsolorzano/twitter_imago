@@ -63,7 +63,7 @@ class MPerfilSocial extends CI_Model {
 
     // Public method to update a record  
     public function update($datos) {
-        $result = $this->db->where('name =', $datos['name']);
+        $result = $this->db->where('cedula =', $datos['cedula']);
         $result = $this->db->where('id !=', $datos['id']);
         $result = $this->db->get('perfil');
 
