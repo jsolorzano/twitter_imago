@@ -61,6 +61,35 @@ class MPerfilSocial extends CI_Model {
             
     }
 
+    // Public method to obtain the perfil by cedula
+    public function obtenerPerfilCedula($cedula) {
+		
+        $this->db->where('cedula', $cedula);
+        
+        $query = $this->db->get('perfil');
+        
+        if ($query->num_rows() > 0)
+            return $query->result();
+        else
+            return $query->result();
+            
+    }
+
+    // Public method to obtain the perfil_twitter
+    public function obtenerPerfilTwitter($perfil_id, $twitter_id) {
+		
+        $this->db->where('perfil_id', $perfil_id);
+        $this->db->where('twitter_id', $twitter_id);
+        
+        $query = $this->db->get('teitter_perfil');
+        
+        if ($query->num_rows() > 0)
+            return $query->result();
+        else
+            return $query->result();
+            
+    }
+
     // Public method to update a record  
     public function update($datos) {
         $result = $this->db->where('cedula =', $datos['cedula']);
@@ -79,6 +108,7 @@ class MPerfilSocial extends CI_Model {
 
     // Public method to delete a record
      public function delete($id) {
+		 
         $result = $this->db->where('service_id =', $id);
         $result = $this->db->get('franchises_perfil');
 

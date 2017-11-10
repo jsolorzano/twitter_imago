@@ -126,9 +126,16 @@ class CPerfilSocial extends CI_Controller {
         }
     }
 	
-	public function ajax_service()
-    {                                          #Campo         #Tabla                #ID
-        $result = $this->MPerfilSocial->obtener();
+	public function ajax_perfil()
+    {
+		$cedula = $this->input->post('cedula');
+		$id_twitter = $this->input->post('cedula');
+        $result = $this->MPerfilSocial->obtenerPerfilCedula($cedula);
+        
+        if(count($result) > 0){
+			echo '{"response":"existe"}';
+			$result2 = $result[0]->id;
+		}
         echo json_encode($result);
     }
 	

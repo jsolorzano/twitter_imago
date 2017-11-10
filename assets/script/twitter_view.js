@@ -42,6 +42,13 @@ $(document).ready(function(){
 			
 		}else{
 			
+			// Validamos si el perfil ya está registrado y asociado
+			//~ $.post(base_url+'CPerfilSocial/ajax_perfil', {'cedula':$("#cedula").val().trim(), 'id_twitter':$("#id_twitter").val()}, function (response) {
+				//~ 
+				//~ alert(response);
+				//~ 
+			//~ });
+			
 			window.location.href = base_url+'social_profile/register?id_twitter='+$("#id_twitter").val()+'&cedula='+$("#cedula").val().trim()+'&ruta='+$("#ruta_origen").val();
 		
 		}
