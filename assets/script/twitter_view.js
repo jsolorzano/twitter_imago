@@ -43,13 +43,70 @@ $(document).ready(function(){
 		}else{
 			
 			// Validamos si el perfil ya está registrado y asociado
-			//~ $.post(base_url+'CPerfilSocial/ajax_perfil', {'cedula':$("#cedula").val().trim(), 'id_twitter':$("#id_twitter").val()}, function (response) {
-				//~ 
+			$.post(base_url+'CPerfilSocial/ajax_perfil', {'cedula':$("#cedula").val().trim(), 'id_twitter':$("#id_twitter").val()}, function (response) {
+				
 				//~ alert(response);
-				//~ 
-			//~ });
-			
-			window.location.href = base_url+'social_profile/register?id_twitter='+$("#id_twitter").val()+'&cedula='+$("#cedula").val().trim()+'&ruta='+$("#ruta_origen").val();
+				
+				if (response['response'] == 'no existe') {
+						
+					// Redireccionamos al formulario de registro y asociación del nuevo perfil
+					window.location.href = base_url+'social_profile/register?id_twitter='+$("#id_twitter").val()+'&cedula='+$("#cedula").val().trim()+'&ruta='+$("#ruta_origen").val();
+						
+				}else if(response['response'] == 'existe asociado'){
+				
+					swal("Disculpe,", "el perfil ya se encuentra asociado a la cuenta");
+				
+				}else{
+					
+					swal({
+						title: "Asociar perfil",
+						text: "El perfil ya existe ¿desea asociarlo a la cuenta?",
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "Asociar",
+						cancelButtonText: "Cancelar",
+						closeOnConfirm: false,
+						closeOnCancel: true
+					},
+					function(isConfirm){
+						
+						if (isConfirm) {
+							
+							var perfil_id = response['response'].split(':');
+							perfil_id = perfil_id[1];
+						 
+							$.post(base_url+'CPerfilSocial/associate', {'perfil_id':perfil_id, 'twitter_id':$("#id_twitter").val()}, function (response2) 
+							{
+								
+								//~ alert(response['response']);
+
+								if (response2['response'] != 'asociado') {
+									
+									swal("Disculpe,", "no se pudo asociar el perfil, por favor comuniquese con su administrador");
+									
+								}else{
+									
+									swal({ 
+										title: "Asociar perfil",
+										text: "Asociado con exito",
+										type: "success" 
+									},
+									function(){
+										location.reload();
+									});
+
+								}
+
+							}, 'json');
+							
+						}
+						
+					});
+
+				}
+				
+			}, 'json');
 		
 		}
 		

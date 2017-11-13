@@ -66,6 +66,32 @@ class CPerfilSocial extends CI_Controller {
         
     }
 	
+	// Método para guardar un nuevo registro
+    public function associate() {
+		
+		$perfil_id = $this->input->post('perfil_id');
+		$twitter_id = $this->input->post('twitter_id');
+		// Registramos la asociación del perfil con la cuenta de twitter
+		$data_asoc = array(
+			'perfil_id' => $perfil_id,
+			'twitter_id' => $twitter_id,
+			'd_create' => date('Y-m-d')
+		);
+		
+		$insert_asoc = $this->MPerfilSocial->insert_asoc($data_asoc);
+		
+		if($insert_asoc != 'existe'){
+			
+			echo '{"response":"asociado"}';
+		
+		}else{
+		
+			echo '{"response":"no asociado"}';
+			
+		}
+        
+    }
+	
 	// Método para editar
     public function ver() {
 		
@@ -129,14 +155,29 @@ class CPerfilSocial extends CI_Controller {
 	public function ajax_perfil()
     {
 		$cedula = $this->input->post('cedula');
-		$id_twitter = $this->input->post('cedula');
+		$id_twitter = $this->input->post('id_twitter');
         $result = $this->MPerfilSocial->obtenerPerfilCedula($cedula);
         
         if(count($result) > 0){
-			echo '{"response":"existe"}';
-			$result2 = $result[0]->id;
+			
+			$result2 = $this->MPerfilSocial->obtenerPerfilTwitter($result[0]->id, $id_twitter);
+			
+			if(count($result2) > 0){
+				
+				echo '{"response":"existe asociado"}';
+				
+			}else{
+			
+				echo '{"response":"existe:'.$result[0]->id.'"}';
+			
+			}
+			
+		}else{
+			
+			echo '{"response":"no existe"}';
+			
 		}
-        echo json_encode($result);
+		
     }
 	
 	
