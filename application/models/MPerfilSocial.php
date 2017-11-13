@@ -44,7 +44,9 @@ class MPerfilSocial extends CI_Model {
             $result = $this->db->insert("twitter_perfil", $datos);
             $id = $this->db->insert_id();
             return $id;
-        }
+        }else{
+			return 'existe';
+		}
     }
 
     // Public method to obtain the perfil by id
@@ -81,7 +83,7 @@ class MPerfilSocial extends CI_Model {
         $this->db->where('perfil_id', $perfil_id);
         $this->db->where('twitter_id', $twitter_id);
         
-        $query = $this->db->get('teitter_perfil');
+        $query = $this->db->get('twitter_perfil');
         
         if ($query->num_rows() > 0)
             return $query->result();
