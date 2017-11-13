@@ -79,6 +79,8 @@ class CTwitter extends CI_Controller {
 			}else{
 				// Consultamos los datos del twitter correspondiente al nombre dado
 				$datos_twitter = $this->MTwitter->obtenerTwitter($twitter_name);
+				// Capturamo el id del twitter
+				$twitter_id = $datos_twitter[0]->id;
 			}
 			
 			// Buscamos los perfiles asociados a la cuenta y armamos una lista para enviarla a la vista también
