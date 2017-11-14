@@ -59,7 +59,7 @@
 							</div>
 						</div>
 						
-						<?php $icon = array('blue-bg', 'lazur-bg', 'yellow-bg'); ?>
+						<?php $icon = array('lazur-bg', 'blue-bg', 'yellow-bg'); ?>
 						<?php $i = 0; ?>
 						<?php foreach($time_line as $time_line){ ?>
 							

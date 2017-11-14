@@ -90,7 +90,7 @@ $(document).ready(function(){
 			$("#detalles").focus();
 			
 		}else{
-			alert($("#id_tweet").val());
+			
 			$.post(base_url+'politico/cambiar_bandeja', {'id':$("#id_tweet").val(), 'nueva_bandeja':$("#nueva_bandeja").val(), 'mensaje':$("#detalles").val()}, function (response) {
 
 				if (response['response'] == "error") {
@@ -127,10 +127,10 @@ $(document).ready(function(){
 		
 		var valor = this.innerHTML;
 		
-		$("#id").val(valor);
+		$("#id_str").val(valor);
 		$("#screen_name").val('');
 		
-		window.location.href = base_url+'twitters/time_line?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'time_line/time_line?id_str='+$("#id_str").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
     
@@ -139,10 +139,10 @@ $(document).ready(function(){
 		
 		var valor = this.innerHTML;
 		
-		$("#id").val('');
+		$("#id_str").val('');
 		$("#screen_name").val(valor);
 		
-		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'twitters/view?screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	
@@ -151,10 +151,10 @@ $(document).ready(function(){
 		
 		var valor = this.getAttribute('id');
 		
-		$("#id").val(valor);
+		$("#id_str").val(valor);
 		$("#screen_name").val('');
 		
-		window.location.href = base_url+'twitters/time_line?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'time_line/time_line?id_str='+$("#id_str").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	

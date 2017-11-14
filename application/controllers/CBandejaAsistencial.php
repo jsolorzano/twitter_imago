@@ -94,7 +94,7 @@ class CBandejaAsistencial extends CI_Controller {
 			
 			// Actualizamos el status del tweet en la tabla 'bandeja_asistencial'
 			$data2 = array(
-				'id' => $id_tweet,
+				'id_str' => $id_tweet,
 				'asignacion' => $nueva_bandeja,
 				'status' => 0
 			);
