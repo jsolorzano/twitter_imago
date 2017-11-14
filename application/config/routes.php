@@ -135,6 +135,11 @@ $route['colectivos_json'] = 'CBandejaColectivos/ajax_colectivos';
 $route['twitters'] = 'CTwitter/index';
 $route['twitters_json'] = 'CTwitter/ajax_twitters';
 $route['twitters/view'] = 'CTwitter/view';
+$route['twitters/time_line'] = 'CTwitter/time_line';
+
+/*   Time-line de Tweets */
+$route['time_line'] = 'CTweet/index';
+$route['time_line/time_line'] = 'CTweet/time_line';
 
 /*   Perfiles Sociales */
 $route['social_profile'] = 'CPerfilSocial';

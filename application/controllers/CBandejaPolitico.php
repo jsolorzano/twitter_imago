@@ -30,15 +30,15 @@ class CBandejaPolitico extends CI_Controller {
 			$sub_array = array();
 			
 			// Proceso para la creación del combo select de asignación
-			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id.";".$row->status."'>";
+			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id_str.";".$row->status."'>";
 			$select .="<option value='0'>Seleccione</option>";
 			$select .="<option value='Oponente'>Oponente</option>";
 			$select .="<option value='Operante'>Operante</option>";
 			$select .="</select>";
 			
-			$sub_array[] = $row->id;
-			$sub_array[] = $row->screen_name;
-			$sub_array[] = $row->text;
+			$sub_array[] = "<a class='verId' title='Ver time-line'>".$row->id_str."</a>";
+			$sub_array[] = "<a class='verName' title='Detalles de cuenta'>".$row->screen_name."</a>";
+			$sub_array[] = "<a class='verText' title='Ver time-line' id='".$row->id_str."'>".$row->text."</a>";
 			$sub_array[] = $row->created_at;
 			$sub_array[] = $select;
 			$bot;
@@ -104,7 +104,7 @@ class CBandejaPolitico extends CI_Controller {
 			
 			// Registramos la acción en la tabla 'time_line'
 			$data_bitacora = array(
-				'fecha' => date('Y-m-d'),
+				'fecha' => date('Y-m-d H:i:s'),
 				'usuario' => $this->session->userdata('logged_in')['id'],
 				'mensaje' => $mensaje,
 				'accion' => $accion,

@@ -14,6 +14,24 @@ class CBandejaEntrada extends CI_Controller {
     }
 	
 	public function index(){
+		
+		// Actualización autmática del campo id_str en caso de perder la data y restaurarla de una fuente incompleta
+		//~ $bandeja = $this->MBandejaEntrada->obtener();
+		//~ 
+		//~ $i = 1;
+		//~ foreach($bandeja as $row){
+			//~ 
+			//~ // Actualización del campo id_str
+			//~ $d_t = array(
+				//~ 'id' => $row->id,
+				//~ 'id_str' => $i
+			//~ );
+			//~ 
+			//~ $this->MBandejaEntrada->update_idstr('bandeja_entrada', $d_t);
+			//~ 
+			//~ $i++;
+		//~ }
+		
 		$this->load->view('base');
 		$this->load->view('bandejas/bandeja_entrada');
 		$this->load->view('footer');
@@ -31,15 +49,15 @@ class CBandejaEntrada extends CI_Controller {
 			$sub_array = array();
 			
 			// Proceso para la creación del combo select de asignación
-			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id.";".$row->status."'>";
+			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id_str.";".$row->status."'>";
 			$select .="<option value='0'>Seleccione</option>";
 			$select .="<option value='Político'>Político</option>";
 			$select .="<option value='Asistencial'>Asistencial</option>";
 			$select .="</select>";
 			
-			$sub_array[] = "<a class='verId'>".$row->id."</a>";
-			$sub_array[] = "<a class='verName'>".$row->screen_name."</a>";
-			$sub_array[] = $row->text;
+			$sub_array[] = "<a class='verId' title='Ver time-line'>".$row->id_str."</a>";
+			$sub_array[] = "<a class='verName' title='Detalles de cuenta'>".$row->screen_name."</a>";
+			$sub_array[] = "<a class='verText' title='Ver time-line' id='".$row->id_str."'>".$row->text."</a>";
 			$sub_array[] = $row->created_at;
 			$sub_array[] = $select;
 			$bot;
@@ -47,6 +65,7 @@ class CBandejaEntrada extends CI_Controller {
 			$sub_array[] = $bot;
 			
 			$data[] = $sub_array;
+			
 		}
 		
 		$output = array(
@@ -95,7 +114,7 @@ class CBandejaEntrada extends CI_Controller {
 			
 			// Actualizamos el status del tweet en la tabla 'bandeja_entrada'
 			$data2 = array(
-				'id' => $id_tweet,
+				'id_str' => $id_tweet,
 				'asignacion' => $nueva_bandeja,
 				'status' => 0
 			);
@@ -105,7 +124,7 @@ class CBandejaEntrada extends CI_Controller {
 			
 			// Registramos la acción en la tabla 'time_line'
 			$data_bitacora = array(
-				'fecha' => date('Y-m-d'),
+				'fecha' => date('Y-m-d H:i:s'),
 				'usuario' => $this->session->userdata('logged_in')['id'],
 				'mensaje' => $mensaje,
 				'accion' => $accion,

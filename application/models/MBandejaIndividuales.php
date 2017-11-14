@@ -93,7 +93,7 @@ class MBandejaIndividuales extends CI_Model {
 	
 	// Método público para consultar los datos de un tweet según su id
     public function obtenerTweet($tweet_id) {
-        $this->db->where('id', $tweet_id);
+        $this->db->where('id_str', $tweet_id);
         $query = $this->db->get('bandeja_individuales');
         if ($query->num_rows() > 0)
             return $query->result();
