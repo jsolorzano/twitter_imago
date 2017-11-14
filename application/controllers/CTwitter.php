@@ -56,11 +56,10 @@ class CTwitter extends CI_Controller {
 	// Método para ver los datos de un twitter
 	public function view(){
 		
-		$twitter_id = $this->input->get('id');
 		$twitter_name = $this->input->get('screen_name');
 		$ruta_origen = $this->input->get('ruta');
 		
-		if($twitter_id == '' && $twitter_name == ''){
+		if($twitter_name == ''){
 			
 			$data = array(
 				'heading' => "404 Page Not Found",
@@ -73,18 +72,11 @@ class CTwitter extends CI_Controller {
 			
 		}else{
 			
-			if($twitter_id != ''){
-				// Consultamos los datos del twitter correspondiente al id dado
-				$datos_twitter = $this->MTwitter->obtenerTwitterById($twitter_id);
-			}else{
-				// Consultamos los datos del twitter correspondiente al nombre dado
-				$datos_twitter = $this->MTwitter->obtenerTwitter($twitter_name);
-				// Capturamo el id del twitter
-				$twitter_id = $datos_twitter[0]->id;
-			}
+			// Consultamos los datos del twitter correspondiente al nombre dado
+			$datos_twitter = $this->MTwitter->obtenerTwitter($twitter_name);
 			
 			// Buscamos los perfiles asociados a la cuenta y armamos una lista para enviarla a la vista también
-			$perfiles = $this->MTwitter->perfiles_asociados($twitter_id);
+			$perfiles = $this->MTwitter->perfiles_asociados($datos_twitter[0]->id);
 			
 			// Armamos los datos a registrar del twitter
 			$data = array(
