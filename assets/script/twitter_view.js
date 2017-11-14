@@ -50,7 +50,7 @@ $(document).ready(function(){
 				if (response['response'] == 'no existe') {
 						
 					// Redireccionamos al formulario de registro y asociación del nuevo perfil
-					window.location.href = base_url+'social_profile/register?id_twitter='+$("#id_twitter").val()+'&cedula='+$("#cedula").val().trim()+'&ruta='+$("#ruta_origen").val();
+					window.location.href = base_url+'social_profile/register?id_twitter='+$("#id_twitter").val()+'&screen_name='+$("#screen_name").val()+'&cedula='+$("#cedula").val().trim()+'&ruta='+$("#ruta_origen").val();
 						
 				}else if(response['response'] == 'existe asociado'){
 				
@@ -177,8 +177,11 @@ $(document).ready(function(){
 		var twitter_id = this.getAttribute('id');
 		twitter_id = twitter_id.split(";");
 		twitter_id = twitter_id[1];  // Id del twitter		
+		var screen_name = this.getAttribute('id');
+		screen_name = screen_name.split(";");
+		screen_name = screen_name[2];  // Nombre del twitter		
              
-		window.location.href = base_url+'social_profile/ver?id_twitter='+twitter_id+'&id_perfil='+perfil_id+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'social_profile/ver?id_twitter='+twitter_id+'&screen_name='+screen_name+'&id_perfil='+perfil_id+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	
@@ -190,9 +193,12 @@ $(document).ready(function(){
 		perfil_id = perfil_id[0];  // Id del perfil
 		var twitter_id = this.getAttribute('id');
 		twitter_id = twitter_id.split(";");
-		twitter_id = twitter_id[1];  // Id del twitter		
+		twitter_id = twitter_id[1];  // Id del twitter
+		var screen_name = this.getAttribute('id');
+		screen_name = screen_name.split(";");
+		screen_name = screen_name[2];  // Nombre del twitter
              
-		window.location.href = base_url+'social_profile/edit?id_twitter='+twitter_id+'&id_perfil='+perfil_id+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'social_profile/edit?id_twitter='+twitter_id+'&screen_name='+screen_name+'&id_perfil='+perfil_id+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	

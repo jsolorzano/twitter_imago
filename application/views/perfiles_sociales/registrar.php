@@ -103,6 +103,7 @@
                             <br>
                             <p class="text-center">
 								<input type="hidden" id="id_twitter" name="id_twitter" value="<?php echo $_GET['id_twitter']; ?>">
+								<input type="hidden" id="screen_name" name="screen_name" value="<?php echo $_GET['screen_name']; ?>">
 								<input type="hidden" id="ruta_origen" value="<?php echo $_GET['ruta']; ?>">
                                 <button class="btn btn-sm btn-primary b-r" type="button" id="volver"><strong>Volver</strong></button>
                                 <button class="btn btn-sm btn-primary" type="button" id="registrar"><strong>Guardar</strong></button>
