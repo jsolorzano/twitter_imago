@@ -104,6 +104,7 @@
                             <p class="text-center">
 								<input type="hidden" id="id_perfil" name="id_perfil" value="<?php echo $id_perfil; ?>">
 								<input type="hidden" id="id_twitter" name="id_twitter" value="<?php echo $id_twitter; ?>">
+								<input type="hidden" id="screen_name" name="screen_name" value="<?php echo $screen_name; ?>">
 								<input type="hidden" id="ruta_origen" value="<?php echo $_GET['ruta']; ?>">
                                 <button class="btn btn-sm btn-primary b-r" type="button" id="volver"><strong>Volver</strong></button>
                                 <button class="btn btn-sm btn-primary" type="button" id="editar"><strong>Guardar</strong></button>

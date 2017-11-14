@@ -9,7 +9,7 @@ $(document).ready(function(){
     });
 
     $('#volver').click(function () {
-        url = base_url+'twitters/view?id='+$("#id_twitter").val()+'&screen_name=&ruta='+$("#ruta_origen").val();
+        url = base_url+'twitters/view?id='+$("#id_twitter").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
         window.location = url;
     });
 	
