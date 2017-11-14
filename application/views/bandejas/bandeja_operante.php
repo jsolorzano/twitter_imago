@@ -34,9 +34,9 @@
 							
                         </table>
                         <!-- Campos ocultos de id y nombre del twitter -->
-                        <input type="hidden" id="id">
+                        <input type="hidden" id="id_str">
 						<input type="hidden" id="screen_name">
-						<input type="hidden" id="ruta_origen" value="bandeja_operante">
+						<input type="hidden" id="ruta_origen" value="bandeja_operantes">
                     </div>
                 </div>
             </div>

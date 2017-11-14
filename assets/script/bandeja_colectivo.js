@@ -38,38 +38,38 @@ $(document).ready(function(){
     });
     
     // Función para ver el time-line de un twitter tomando en cuenta el valor del id
-	$("table#tab_entradas").on('click', 'a.verId', function (e) {
+	$("table#tab_colectivos").on('click', 'a.verId', function (e) {
 		
 		var valor = this.innerHTML;
 		
-		$("#id").val(valor);
+		$("#id_str").val(valor);
 		$("#screen_name").val('');
 		
-		window.location.href = base_url+'twitters/time_line?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'time_line/time_line?id_str='+$("#id_str").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
     
 	// Función para ver los datos de un twitter tomando en cuenta el valor del screen_name
-	$("table#tab_entradas").on('click', 'a.verName', function (e) {
+	$("table#tab_colectivos").on('click', 'a.verName', function (e) {
 		
 		var valor = this.innerHTML;
 		
-		$("#id").val('');
+		$("#id_str").val('');
 		$("#screen_name").val(valor);
 		
-		window.location.href = base_url+'twitters/view?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'twitters/view?screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	
 	// Función para ver el time-line de un twitter tomando en cuenta el valor del id
-	$("table#tab_entradas").on('click', 'a.verText', function (e) {
+	$("table#tab_colectivos").on('click', 'a.verText', function (e) {
 		
 		var valor = this.getAttribute('id');
 		
-		$("#id").val(valor);
+		$("#id_str").val(valor);
 		$("#screen_name").val('');
 		
-		window.location.href = base_url+'twitters/time_line?id='+$("#id").val()+'&screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
+		window.location.href = base_url+'time_line/time_line?id_str='+$("#id_str").val()+'&ruta='+$("#ruta_origen").val();
 		
 	});
 	

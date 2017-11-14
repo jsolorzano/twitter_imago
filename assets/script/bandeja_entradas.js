@@ -138,7 +138,7 @@ $(document).ready(function(){
 		
 		var valor = this.innerHTML;
 		
-		$("#id").val('');
+		$("#id_str").val('');
 		$("#screen_name").val(valor);
 		
 		window.location.href = base_url+'twitters/view?screen_name='+$("#screen_name").val()+'&ruta='+$("#ruta_origen").val();
