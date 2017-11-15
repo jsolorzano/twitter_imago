@@ -14,30 +14,6 @@
         </ol>
     </div>
 </div>
-<?php
-//~ echo "probando...<br>";
-//~ // Recorrido de los datos del usuario
-//~ $ci = & get_instance();
-//~ $accionesperfil = array();  // Ids de las acciones (módulos) permitidos para el perfil logueado
-//~ $accionesusuario = array();  // Ids de las acciones (módulos) permitidos para el usuario logueado
-//~ foreach($ci->session->userdata('logged_in') as $clave => $userdata){
-	//~ if($clave == "acciones"){
-		//~ foreach($userdata as $accion){
-			//~ $accionesperfil[] = $accion[0]->id;
-		//~ }
-	//~ }else if($clave == "permisos"){
-		//~ foreach($userdata as $permiso){
-			//~ $accionesusuario[] = $permiso[0]->id;
-		//~ }
-	//~ }
-//~ }
-//~ 
-//~ echo "Acciones perfil:<br>";
-//~ print_r($accionesperfil);
-//~ echo "<br>";
-//~ echo "Acciones usuario:<br>";
-//~ print_r($accionesusuario);
-?>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
         <div class="col-lg-12">
@@ -139,4 +115,4 @@
         </div>
     </div>
 </div>
- <script src="<?php echo assets_url('script/users.js'); ?>" type="text/javascript" charset="utf-8" ></script>
+ <script src="<?php echo assets_url('script/users_alternative.js'); ?>" type="text/javascript" charset="utf-8" ></script>
