@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Imago M3</title>
+    <title>Puesto de comando Aragua</title>
 	<!-- CSS Files -->
     <link href="<?php echo assets_url('css/bootstrap.min.css');?>" rel="stylesheet">
     <link href="<?php echo assets_url('font-awesome/css/font-awesome.css');?>" rel="stylesheet">
