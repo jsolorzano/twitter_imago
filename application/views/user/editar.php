@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Perfiles </h2>
+        <h2>Usuarios </h2>
         <ol class="breadcrumb">
             <li>
                 <a href="<?php echo base_url() ?>home">Inicio</a>
@@ -69,17 +69,7 @@
 							<div class="col-sm-10">
 								<select class="form-control m-b" id="tiendas" multiple="multiple">
 									<?php
-									// Armamos un arreglo de ids de tiendas asignadas a otros usuarios diferentes al que se está editando
-									//~ $tiendas_ids = array();
-									//~ $tienda_asoc_id = 0;  // Variable que almacenará el id de la tienda que pertenece al usuario editado
-									//~ foreach ($user_tiendas as $user_tienda) {
-										//~ if($user_tienda->user_id != $id){
-											//~ $tiendas_ids[] = $user_tienda->franchise_id;
-										//~ }else{
-											//~ $tienda_asoc_id = $user_tienda->franchise_id;
-										//~ }
-									//~ }
-									// Primero creamos un arreglo con la lista de ids de servicios proveniente del controlador
+									// Primero creamos un arreglo con la lista de ids de tiendas proveniente del controlador
 									$ids_tiendas = explode(",",$ids_tiendas);
 									?>
 									<?php foreach ($tiendas as $tienda) { ?>
@@ -95,7 +85,17 @@
 						<div class="form-group"><label class="col-sm-2 control-label" >Acciones</label>
 							<div class="col-sm-10">
 								<select id="actions_ids" class="form-control" multiple="multiple">
-									
+									<?php
+									// Primero creamos un arreglo con la lista de ids de acciones proveniente del controlador
+									$acciones_ids = explode(",",$ids_actions);
+									?>
+									<?php foreach ($acciones as $accion) { ?>
+										<?php if(in_array($accion->id, $acciones_ids)) { ?>
+										<option selected="selected" value="<?php echo $accion->id ?>"><?php echo $accion->name ?></option>
+										<?php }else{ ?>
+										<option value="<?php echo $accion->id ?>"><?php echo $accion->name ?></option>
+										<?php } ?>
+									<?php } ?>
 								</select>
 							</div>
 						</div>
@@ -123,7 +123,7 @@
 											<div class="panel-body">
 											  <!--<button  class="btn btn-w-m btn-primary" id="i_new_line"><i class="fa fa-plus"></i>&nbsp;Agregar Acción</button>-->
 												 <div class="table-responsive">
-													<table style="width: 100%" class="table dataTable table-striped table-bordered dt-responsive jambo_table bulk_action" id="tab_acciones">
+													<table style="width: 100%" class="table dataTable table-striped table-bordered dt-responsive" id="tab_acciones">
 														<thead>
 														<tr>
 															<th>Item</th>
