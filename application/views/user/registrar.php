@@ -115,4 +115,4 @@
         </div>
     </div>
 </div>
- <script src="<?php echo assets_url('script/users_alternative.js'); ?>" type="text/javascript" charset="utf-8" ></script>
+ <script src="<?php echo assets_url('script/users.js'); ?>" type="text/javascript" charset="utf-8" ></script>

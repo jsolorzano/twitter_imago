@@ -131,7 +131,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
 						<li>
-							<span class="m-r-sm text-muted welcome-message">Bienvenido a Imago M3.</span>
+							<span class="m-r-sm text-muted welcome-message">Bienvenido a Puesto de comando Aragua.</span>
 						</li>
 						<!--<li class="dropdown">
 							<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
