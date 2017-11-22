@@ -185,7 +185,7 @@ class Welcome extends CI_Controller {
 			
 		}else{
 		
-			echo "success";
+			//~ echo "success";
 			
 			// Precarga de datos necesarios
 			
