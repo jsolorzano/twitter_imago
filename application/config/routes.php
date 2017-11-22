@@ -149,6 +149,9 @@ $route['social_profile/edit'] = 'CPerfilSocial/edit';
 $route['social_profile/associate'] = 'CPerfilSocial/associate';
 
 
+/*   Migraciones */
+$route['migrar'] = 'CMigrations';
+
 /*assets*/
 $route['assets/(:any)'] = 'assets/$1';
 
