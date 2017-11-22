@@ -6,7 +6,7 @@ $(document).ready(function(){
     var base_url = $("#base_url").val();
 	
 	
-	// Función para ver el perfil de twitter
+	// Función para levantar modal de vinculación de perfil
 	$("#boton_vincular").on('click', function (e) {
 		
 		swal({
@@ -32,7 +32,7 @@ $(document).ready(function(){
 		
 	});
 	
-	// Función para ver el perfil de twitter
+	// Función para ir al formulario de registro y vinculación de perfil
 	$("#vincular").on('click', function (e) {
 		
 		if($("#cedula").val().trim() == ''){

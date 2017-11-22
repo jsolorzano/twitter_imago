@@ -31,7 +31,11 @@
 						<a href="profile.html">
 							<img alt="image" class="img-circle m-t-xs img-responsive" src="<?php echo $profile_image_url; ?>">
 						</a>
-						<!--<div class="m-t-xs font-bold">xxxxxxx</div>-->
+						<div class="m-t-xs font-bold">
+							<a class="btn btn-primary btn-xs" href="https://twitter.com/<?php echo $screen_name; ?>" target="_blank">
+								<i class="fa fa-twitter"></i> Ver en Twitter
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="col-sm-10">
