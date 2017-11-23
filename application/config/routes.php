@@ -103,6 +103,11 @@ $route['productos_json4'] = 'CProductos/ajax_productos4';
 $route['productos/register'] = 'CProductos/register';
 $route['productos/edit/(:num)'] = 'CProductos/edit/$1';
 $route['productos/delete/(:num)'] = 'CProductos/delete/$1';
+/*   Grupos Bandejas */
+$route['grupos_bandejas'] = 'CGruposBandejas';
+$route['grupos_bandejas/register'] = 'CGruposBandejas/register';
+$route['grupos_bandejas/edit/(:num)'] = 'CGruposBandejas/edit/$1';
+$route['grupos_bandejas/delete/(:num)'] = 'CGruposBandejas/delete/$1';
 
 /*   Bandeja de entrada */
 $route['bandeja_entrada'] = 'CBandejaEntrada/index';
