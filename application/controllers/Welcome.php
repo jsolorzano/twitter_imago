@@ -32,6 +32,7 @@ class Welcome extends CI_Controller {
         $this->load->model('MAcciones');
         $this->load->model('MMenus');
         $this->load->model('MSubMenus');
+        $this->load->model('MGruposBandejas');
         //~ $this->load->model('MFranchises');
     }
 	 
@@ -344,6 +345,22 @@ class Welcome extends CI_Controller {
 				}
 			
 			}
+			
+			// Verificamos si existe la tabla de grupos de bandejas 'grupos_bandejas'
+			$exists_groups = $this->db->table_exists('grupos_bandejas');
+			
+			if($exists_groups){
+			
+				$group = $this->MGruposBandejas->obtener();
+				// Creamos los grupos básicos si éstos no existen ('Político' y 'Asistencial')
+				if(count($group) == 0){
+					
+					// Importamos los grupos básicos
+					$this->import_grupos();
+				
+				}
+			
+			}
 		
 		}
 		
@@ -448,6 +465,30 @@ class Welcome extends CI_Controller {
 			);
 			
 			$insert_icon = $this->MMenus->insert_icons($data_icon);
+			
+		}
+		
+		fclose ($fp);
+        
+    }
+    
+    // Método que importa los grupos de bandejas desde un csv
+    public function import_grupos() {
+        
+        $ruta = getcwd();  // Obtiene el directorio actual en donde se está trabajando
+        
+        $fp = fopen ($ruta."/application/migrations/grupos_bandejas.csv","r");
+        
+        while ($data = fgetcsv ($fp, 1000, ",")) {
+			
+			$data_group = array(
+				'nombre' => $data[1],
+				'status' => $data[2],
+				'd_create' => date('Y-m-d H:i:s'),
+				'd_update' => date('Y-m-d H:i:s')
+			);
+			
+			$insert_group = $this->MGruposBandejas->insert($data_group);
 			
 		}
 		

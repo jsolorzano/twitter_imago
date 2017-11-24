@@ -55,7 +55,7 @@ $(document).ready(function(){
 		
 		swal({
             title: "Cambiar de bandeja",
-            text: "¿Está seguro de asignar el twit a otra bandeja?",
+            text: "¿Está seguro de asignar el tweet a otra bandeja?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",

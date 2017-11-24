@@ -1,29 +1,27 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CBandejaOponentes extends CI_Controller {
+class CBandejaRespuestas extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
        
 		// Load database
-        $this->load->model('MBandejaOponentes');
+        $this->load->model('MBandejaRespuestas');
         $this->load->model('MBandejaEntrada');
 		
     }
 	
 	public function index(){
 		$this->load->view('base');
-		$this->load->view('bandejas/bandeja_oponente');
+		$this->load->view('bandejas/bandeja_respuestas');
 		$this->load->view('footer');
 	}
 	
-	public function ajax_oponentes(){
+	public function ajax_respuestas(){
 		
-		// Buscamos los perfiles asociados al grupo de bandejas 'Político'
-		$perfiles_politicos = $this->MBandejaOponentes->getProfileByGroup(1);
-		
-		$fetch_data = $this->MBandejaOponentes->make_datatables();
+		// Añadimos un filtrado por el id del perfil del usuario logueado
+		$fetch_data = $this->MBandejaRespuestas->make_datatables($this->session->userdata('logged_in')['profile_id']);
 		//~ $consulta_ejecutada = $this->db->last_query();
 		//~ echo $consulta_ejecutada;
 		//~ echo count($fetch_data);
@@ -31,14 +29,6 @@ class CBandejaOponentes extends CI_Controller {
 		foreach($fetch_data as $row){
 			
 			$sub_array = array();
-			
-			// Proceso para la creación del combo select de asignación
-			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id_str.";".$row->status."'>";
-			$select .="<option value='0'>Seleccione</option>";
-			foreach($perfiles_politicos as $perfil_politico){
-				$select .="<option value='".$perfil_politico->id."'>".$perfil_politico->name."</option>";
-			}
-			$select .="</select>";
 			
 			$sub_array[] = "<a class='verId' title='Ver time-line'>".$row->id_str."</a>";
 			$sub_array[] = "<a class='verName' title='Detalles de cuenta'>".$row->screen_name."</a>";
@@ -48,15 +38,16 @@ class CBandejaOponentes extends CI_Controller {
 			$bot;
 			if($row->bot == 0){$bot = "No";}else{$bot = "<span style='color:#D33333;'>Sí</span>";}
 			$sub_array[] = $bot;
-			$sub_array[] = $select;
+			$sub_array[] = $row->name;
+			$sub_array[] = "<a id='resuelto'><button class='btn btn-outline btn-primary dim' type='button'>Resuelto</button></a>";
 			
 			$data[] = $sub_array;
 		}
 		
 		$output = array(
 			"draw" => intval($_POST["draw"]),
-			"recordsTotal" => $this->MBandejaOponentes->get_all_data(),
-			"recordsFiltered" => $this->MBandejaOponentes->get_filtered_data(),
+			"recordsTotal" => $this->MBandejaRespuestas->get_all_data($this->session->userdata('logged_in')['profile_id']),
+			"recordsFiltered" => $this->MBandejaRespuestas->get_filtered_data($this->session->userdata('logged_in')['profile_id']),
 			"data" => $data
 		);
 		
@@ -74,10 +65,10 @@ class CBandejaOponentes extends CI_Controller {
 		
 		// Indicamos a qué tabla será movido el tweet
 		$tabla = "bandeja_respuestas";
-		$accion = "Asignado a bandeja de respuestas";
+		$accion = "Resuelto";
 		
 		// Consultamos los datos del tweet correspondiente al id dado
-		$datos_tweet = $this->MBandejaOponentes->obtenerTweet($id_tweet);
+		$datos_tweet = $this->MBandejaRespuestas->obtenerTweet($id_tweet);
 		
 		// Armamos los datos a registrar del tweet
 		$data = array(
@@ -94,14 +85,14 @@ class CBandejaOponentes extends CI_Controller {
 		
 		if($insert){
 			
-			// Actualizamos el status del tweet en la tabla 'bandeja_oponentes'
+			// Actualizamos el status del tweet en la tabla 'bandeja_individuales'
 			$data2 = array(
 				'id_str' => $id_tweet,
 				'asignacion' => $nueva_bandeja,
 				'status' => 0
 			);
 			
-			$update = $this->MBandejaEntrada->update_status('bandeja_oponentes', $data2);
+			$update = $this->MBandejaEntrada->update_status('bandeja_individuales', $data2);
 			
 			
 			// Registramos la acción en la tabla 'time_line'
