@@ -121,9 +121,11 @@ $route['politico/cambiar_bandeja'] = 'CBandejaPolitico/cambio_bandeja';
 /*   Bandeja de operantes */
 $route['bandeja_operantes'] = 'CBandejaOperantes/index';
 $route['operantes_json'] = 'CBandejaOperantes/ajax_operantes';
+$route['operantes/cambiar_bandeja'] = 'CBandejaOperantes/cambio_bandeja';
 /*   Bandeja de oponentes */
 $route['bandeja_oponentes'] = 'CBandejaOponentes/index';
 $route['oponentes_json'] = 'CBandejaOponentes/ajax_oponentes';
+$route['oponentes/cambiar_bandeja'] = 'CBandejaOponentes/cambio_bandeja';
 
 /*   Bandeja asistencial */
 $route['bandeja_asistencial'] = 'CBandejaAsistencial/index';
@@ -132,9 +134,15 @@ $route['asistencial/cambiar_bandeja'] = 'CBandejaAsistencial/cambio_bandeja';
 /*   Bandeja de individuales */
 $route['bandeja_individuales'] = 'CBandejaIndividuales/index';
 $route['individuales_json'] = 'CBandejaIndividuales/ajax_individuales';
+$route['individuales/cambiar_bandeja'] = 'CBandejaIndividuales/cambio_bandeja';
 /*   Bandeja de colectivos */
 $route['bandeja_colectivos'] = 'CBandejaColectivos/index';
 $route['colectivos_json'] = 'CBandejaColectivos/ajax_colectivos';
+$route['colectivos/cambiar_bandeja'] = 'CBandejaColectivos/cambio_bandeja';
+
+/*   Bandeja de respuestas */
+$route['bandeja_respuestas'] = 'CBandejaRespuestas/index';
+$route['respuestas_json'] = 'CBandejaRespuestas/ajax_respuestas';
 
 /*   Perfil de Twitter */
 $route['twitters'] = 'CTwitter/index';

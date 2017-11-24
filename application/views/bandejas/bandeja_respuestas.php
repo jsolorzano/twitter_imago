@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Bandeja individuales</h2>
+        <h2>Bandeja respuestas</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="<?php echo base_url() ?>home">Inicio</a>
             </li>
             <li class="active">
-                <strong>Bandeja individuales</strong>
+                <strong>Bandeja respuestas</strong>
             </li>
         </ol>
     </div>
@@ -16,12 +16,12 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Bandeja individuales </h5>
+                    <h5>Bandeja respuestas </h5>
                     <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <table id="tab_individuales" class="table table-striped table-bordered dt-responsive table-hover dataTables-example" >
+                        <table id="tab_respuestas" class="table table-striped table-bordered dt-responsive table-hover dataTables-example" >
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -30,6 +30,7 @@
                                     <th>Fecha</th>
                                     <th>Bot</th>
                                     <th>Perfil</th>
+                                    <th>Responder</th>
                                 </tr>
                             </thead>
 							
@@ -37,7 +38,7 @@
                         <!-- Campos ocultos de id y nombre del twitter -->
                         <input type="hidden" id="id_str">
 						<input type="hidden" id="screen_name">
-						<input type="hidden" id="ruta_origen" value="bandeja_individuales">
+						<input type="hidden" id="ruta_origen" value="bandeja_oponentes">
                     </div>
                 </div>
             </div>
@@ -54,7 +55,7 @@
 			<h4 class="modal-title" style="color:#ffffff">
 			   <center>
 				<span class="glyphicon glyphicon-search"></span>
-				&nbsp;Indique los detalles de la asignación
+				&nbsp;Indique los detalles de la resolución
 			   </center>
 			</h4>
 		 </div>
@@ -89,5 +90,6 @@
 </div>
 <!-- Cierre Modal para descripción del movimiento -->
 
+
  <!-- Page-Level Scripts -->
-<script src="<?php echo assets_url(); ?>script/bandeja_individual.js"></script>
+<script src="<?php echo assets_url(); ?>script/bandeja_respuestas.js"></script>

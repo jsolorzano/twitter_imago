@@ -100,6 +100,19 @@ class MBandejaIndividuales extends CI_Model {
         else
             return $query->result();
     }
+    
+    // Método para consultar los perfiles de un grupo de bandejas específico
+    public function getProfileByGroup($group_id) {
+        $this->db->select('p.id, p.name');
+		$this->db->from('grupos_bandejas_perfiles g_b_p');
+		$this->db->join('profile p', 'p.id = g_b_p.perfil_id');
+        $this->db->where('g_b_p.grupo_bandeja_id =', $group_id);
+		$query = $this->db->get();
+        if ($query->num_rows() > 0)
+            return $query->result();
+        else
+            return $query->result();
+    }
 
 }
 ?>

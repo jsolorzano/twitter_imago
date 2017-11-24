@@ -2,7 +2,7 @@ $(document).ready(function(){
 	// Capturamos la base_url
     var base_url = $("#base_url").val();
 	
-	var tabPolitico = $('#tab_politico').DataTable({
+	var tabIndividuales = $('#tab_respuestas').DataTable({
         //~ "paging": true,
         //~ "lengthChange": false,
         "autoWidth": false,
@@ -14,7 +14,7 @@ $(document).ready(function(){
         "order": [],
         "ajax": {
 			"method":"POST",
-			"url": base_url+"politico_json"
+			"url": base_url+"respuestas_json"
 		},
 		"columnDefs": [
 			{
@@ -32,13 +32,15 @@ $(document).ready(function(){
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "10%"},
-            {"sWidth": "9%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
-            {"sWidth": "3%", "sClass": "registro center"}
+            {"sClass": "registro center", "sWidth": "3%"},
+            {"sClass": "registro center", "sWidth": "10%"},
+            //~ {"sWidth": "9%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
+            {"sWidth": "9%", "sClass": "registro center"}
         ]
     });
     
-	// Función para cambiar un twitter a otra bandeja según la opción seleccionada en su respectivo combo
-	$("table#tab_politico").on('change', 'select.cambiar', function (e) {
+    // Función para cambiar un twitter a la bandeja de respuestas, asignado al perfil indicado
+	$("table#tab_individuales").on('change', 'select.cambiar', function (e) {
 		
 		e.preventDefault();
 		
@@ -49,13 +51,13 @@ $(document).ready(function(){
 		estatus_actual = estatus_actual.split(";");
 		estatus_actual = estatus_actual[1];  // Estatus actual de la cola
 		var select_actual = $(this);  // Combo actualmente seleccionado
-		var nueva_bandeja = $(this).val();  // Bandeja nueva para el tweet
+		var perfil_id = $(this).val();  // id del perfil seleccionado
 		
 		//~ alert("Id: "+id+" | Nueva bandeja: "+nueva_bandeja);
 		
 		swal({
             title: "Cambiar de bandeja",
-            text: "¿Está seguro de asignar el tweet a otra bandeja?",
+            text: "¿Está seguro de asignar el tweet a la bandeja de respuestas?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -69,7 +71,8 @@ $(document).ready(function(){
              
                 $("#modal_detalles").modal('show');
                 $("#id_tweet").val(id);
-                $("#nueva_bandeja").val(nueva_bandeja);
+                $("#id_perfil").val(perfil_id);
+                $("#nueva_bandeja").val('Respuestas');
                 
             }else{
 				
@@ -81,7 +84,7 @@ $(document).ready(function(){
 		
 	});
 	
-	// Función para cambiar un twitter a otra bandeja según la opción seleccionada en su respectivo combo
+	// Función para cambiar un tweet a la bandeja de respuestas con el perfil seleccionado
 	$("#asignar").on('click', function (e) {
 		
 		if($("#detalles").val().trim() == ''){
@@ -91,7 +94,7 @@ $(document).ready(function(){
 			
 		}else{
 			
-			$.post(base_url+'politico/cambiar_bandeja', {'id':$("#id_tweet").val(), 'nueva_bandeja':$("#nueva_bandeja").val(), 'mensaje':$("#detalles").val()}, function (response) {
+			$.post(base_url+'individuales/cambiar_bandeja', {'id':$("#id_tweet").val(), 'nueva_bandeja':$("#nueva_bandeja").val(), 'mensaje':$("#detalles").val(), 'id_perfil':$("#id_perfil").val()}, function (response) {
 
 				if (response['response'] == "error") {
 				   
@@ -112,18 +115,17 @@ $(document).ready(function(){
 						 type: "success" 
 					   },
 					   function(){
-						 window.location.href = base_url+'bandeja_politico';
+						 window.location.href = base_url+'bandeja_individuales';
 					 });
 				}
 			}, 'json');
 		
-		}
-	
+		}		
 		
 	});
-	
-	// Función para ver el time-line de un twitter tomando en cuenta el valor del id
-	$("table#tab_politico").on('click', 'a.verId', function (e) {
+    
+    // Función para ver el time-line de un twitter tomando en cuenta el valor del id
+	$("table#tab_individuales").on('click', 'a.verId', function (e) {
 		
 		var valor = this.innerHTML;
 		
@@ -135,7 +137,7 @@ $(document).ready(function(){
 	});
     
 	// Función para ver los datos de un twitter tomando en cuenta el valor del screen_name
-	$("table#tab_politico").on('click', 'a.verName', function (e) {
+	$("table#tab_individuales").on('click', 'a.verName', function (e) {
 		
 		var valor = this.innerHTML;
 		
@@ -147,7 +149,7 @@ $(document).ready(function(){
 	});
 	
 	// Función para ver el time-line de un twitter tomando en cuenta el valor del id
-	$("table#tab_politico").on('click', 'a.verText', function (e) {
+	$("table#tab_individuales").on('click', 'a.verText', function (e) {
 		
 		var valor = this.getAttribute('id');
 		
