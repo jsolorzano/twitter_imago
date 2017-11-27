@@ -3,9 +3,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class MBandejaRespuestas extends CI_Model {
+class MBandejaResueltos extends CI_Model {
 	
-	var $table = "bandeja_respuestas b_r";
+	var $table = "bandeja_resueltos b_r";
 	
 	var $select_column = array(
 		"b_r.id", 
@@ -17,7 +17,7 @@ class MBandejaRespuestas extends CI_Model {
 		"b_r.bot",
 		"b_r.status",
 		"p.name",
-		"b_r.perfil_id",
+		"b_r.perfil_id"
 	);
 	
 	var $order_column = array(
@@ -39,7 +39,7 @@ class MBandejaRespuestas extends CI_Model {
 
     // Public method to obtain the twitters
     public function obtener() {
-        $query = $this->db->get('bandeja_respuestas');
+        $query = $this->db->get('bandeja_resueltos');
 
         if ($query->num_rows() > 0)
             return $query->result();
@@ -103,7 +103,7 @@ class MBandejaRespuestas extends CI_Model {
 	// Método público para consultar los datos de un tweet según su id
     public function obtenerTweet($tweet_id) {
         $this->db->where('id_str', $tweet_id);
-        $query = $this->db->get('bandeja_respuestas');
+        $query = $this->db->get('bandeja_resueltos');
         if ($query->num_rows() > 0)
             return $query->result();
         else
