@@ -2,7 +2,7 @@ $(document).ready(function(){
 	// Capturamos la base_url
     var base_url = $("#base_url").val();
 	
-	var tabIndividuales = $('#tab_respuestas').DataTable({
+	var tabIndividuales = $('#tab_resueltos').DataTable({
         //~ "paging": true,
         //~ "lengthChange": false,
         "autoWidth": false,
@@ -14,7 +14,7 @@ $(document).ready(function(){
         "order": [],
         "ajax": {
 			"method":"POST",
-			"url": base_url+"respuestas_json"
+			"url": base_url+"resueltos_json"
 		},
 		"columnDefs": [
 			{
@@ -33,14 +33,12 @@ $(document).ready(function(){
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "10%"},
             {"sClass": "registro center", "sWidth": "3%"},
-            {"sClass": "registro center", "sWidth": "10%"},
-            //~ {"sWidth": "9%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
-            {"sWidth": "9%", "sClass": "registro center"}
+            {"sClass": "registro center", "sWidth": "10%"}
         ]
     });
     
-    // Función para cambiar un twitter a la bandeja de resueltos, asignado al perfil indicado
-	$("table#tab_respuestas").on('click', 'a.resuelto', function (e) {
+    // Función para cambiar un twitter a la bandeja de respuestas, asignado al perfil indicado
+	$("table#tab_resueltos").on('change', 'select.cambiar', function (e) {
 		
 		e.preventDefault();
 		
@@ -50,16 +48,14 @@ $(document).ready(function(){
 		var estatus_actual = this.getAttribute('id');
 		estatus_actual = estatus_actual.split(";");
 		estatus_actual = estatus_actual[1];  // Estatus actual de la cola
-		var perfil_id = this.getAttribute('id');
-		perfil_id = perfil_id.split(";");
-		perfil_id = perfil_id[2];  // id del perfil
 		var select_actual = $(this);  // Combo actualmente seleccionado
+		var perfil_id = $(this).val();  // id del perfil seleccionado
 		
-		//~ alert("Id: "+id+" | Perfil Id: "+perfil_id);
+		//~ alert("Id: "+id+" | Nueva bandeja: "+nueva_bandeja);
 		
 		swal({
             title: "Cambiar de bandeja",
-            text: "¿Está seguro de asignar el tweet a la bandeja de resueltos?",
+            text: "¿Está seguro de asignar el tweet a la bandeja de respuestas?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -74,7 +70,7 @@ $(document).ready(function(){
                 $("#modal_detalles").modal('show');
                 $("#id_tweet").val(id);
                 $("#id_perfil").val(perfil_id);
-                $("#nueva_bandeja").val('Resueltos');
+                $("#nueva_bandeja").val('Respuestas');
                 
             }else{
 				
@@ -86,7 +82,7 @@ $(document).ready(function(){
 		
 	});
 	
-	// Función para cambiar un tweet a la bandeja de resueltos con el perfil seleccionado
+	// Función para cambiar un tweet a la bandeja de respuestas con el perfil seleccionado
 	$("#asignar").on('click', function (e) {
 		
 		if($("#detalles").val().trim() == ''){
@@ -96,7 +92,7 @@ $(document).ready(function(){
 			
 		}else{
 			
-			$.post(base_url+'respuestas/cambiar_bandeja', {'id':$("#id_tweet").val(), 'nueva_bandeja':$("#nueva_bandeja").val(), 'mensaje':$("#detalles").val(), 'id_perfil':$("#id_perfil").val()}, function (response) {
+			$.post(base_url+'individuales/cambiar_bandeja', {'id':$("#id_tweet").val(), 'nueva_bandeja':$("#nueva_bandeja").val(), 'mensaje':$("#detalles").val(), 'id_perfil':$("#id_perfil").val()}, function (response) {
 
 				if (response['response'] == "error") {
 				   
@@ -117,7 +113,7 @@ $(document).ready(function(){
 						 type: "success" 
 					   },
 					   function(){
-						 window.location.href = base_url+'bandeja_respuestas';
+						 window.location.href = base_url+'bandeja_individuales';
 					 });
 				}
 			}, 'json');
@@ -127,7 +123,7 @@ $(document).ready(function(){
 	});
     
     // Función para ver el time-line de un twitter tomando en cuenta el valor del id
-	$("table#tab_respuestas").on('click', 'a.verId', function (e) {
+	$("table#tab_resueltos").on('click', 'a.verId', function (e) {
 		
 		var valor = this.innerHTML;
 		
@@ -139,7 +135,7 @@ $(document).ready(function(){
 	});
     
 	// Función para ver los datos de un twitter tomando en cuenta el valor del screen_name
-	$("table#tab_respuestas").on('click', 'a.verName', function (e) {
+	$("table#tab_resueltos").on('click', 'a.verName', function (e) {
 		
 		var valor = this.innerHTML;
 		
@@ -151,7 +147,7 @@ $(document).ready(function(){
 	});
 	
 	// Función para ver el time-line de un twitter tomando en cuenta el valor del id
-	$("table#tab_respuestas").on('click', 'a.verText', function (e) {
+	$("table#tab_resueltos").on('click', 'a.verText', function (e) {
 		
 		var valor = this.getAttribute('id');
 		

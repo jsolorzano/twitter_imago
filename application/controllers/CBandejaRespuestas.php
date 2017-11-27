@@ -39,7 +39,7 @@ class CBandejaRespuestas extends CI_Controller {
 			if($row->bot == 0){$bot = "No";}else{$bot = "<span style='color:#D33333;'>Sí</span>";}
 			$sub_array[] = $bot;
 			$sub_array[] = $row->name;
-			$sub_array[] = "<a id='resuelto'><button class='btn btn-outline btn-primary dim' type='button'>Resuelto</button></a>";
+			$sub_array[] = "<a class='resuelto' id='".$row->id_str.";".$row->status.";".$row->perfil_id."'><button class='btn btn-outline btn-primary dim' type='button'>Resuelto</button></a>";
 			
 			$data[] = $sub_array;
 		}
@@ -64,7 +64,7 @@ class CBandejaRespuestas extends CI_Controller {
 		$mensaje = $this->input->post('mensaje');
 		
 		// Indicamos a qué tabla será movido el tweet
-		$tabla = "bandeja_respuestas";
+		$tabla = "bandeja_resueltos";
 		$accion = "Resuelto";
 		
 		// Consultamos los datos del tweet correspondiente al id dado
@@ -85,14 +85,14 @@ class CBandejaRespuestas extends CI_Controller {
 		
 		if($insert){
 			
-			// Actualizamos el status del tweet en la tabla 'bandeja_individuales'
+			// Actualizamos el status del tweet en la tabla 'bandeja_respuestas'
 			$data2 = array(
 				'id_str' => $id_tweet,
 				'asignacion' => $nueva_bandeja,
 				'status' => 0
 			);
 			
-			$update = $this->MBandejaEntrada->update_status('bandeja_individuales', $data2);
+			$update = $this->MBandejaEntrada->update_status('bandeja_respuestas', $data2);
 			
 			
 			// Registramos la acción en la tabla 'time_line'
