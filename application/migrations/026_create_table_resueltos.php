@@ -25,27 +25,33 @@ class Migration_create_table_resueltos extends CI_Migration
 				),
 				"text" => array(
 					"type" => "VARCHAR",
-					"constraint" => 250
+					"constraint" => 250,
+					"null" => TRUE
 				),
 				"created_at" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"asignacion" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"bot" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"status" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"perfil_id" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				)
 			)
 		);

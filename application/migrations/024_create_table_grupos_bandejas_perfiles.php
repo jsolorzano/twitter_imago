@@ -24,10 +24,12 @@ class Migration_create_table_grupos_bandejas_perfiles extends CI_Migration
 					"constraint" => 11
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 			)
 		);

@@ -17,7 +17,8 @@ class Migration_create_table_time_line extends CI_Migration
 				),
 				"fecha" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"usuario" => array(
 					"type" => "INT",
@@ -25,11 +26,13 @@ class Migration_create_table_time_line extends CI_Migration
 				),
 				"mensaje" => array(
 					"type" => "VARCHAR",
-					"constraint" => 250
+					"constraint" => 250,
+					"null" => TRUE
 				),
 				"accion" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"tweet_id" => array(
 					"type" => "VARCHAR",

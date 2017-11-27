@@ -17,25 +17,31 @@ class Migration_create_table_users_tiendas extends CI_Migration
 				),
 				"user_id" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"tienda_id" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"tipo" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"status" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);

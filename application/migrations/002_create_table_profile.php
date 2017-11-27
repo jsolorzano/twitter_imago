@@ -20,10 +20,12 @@ class Migration_create_table_profile extends CI_Migration
 					"constraint" => 50
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);

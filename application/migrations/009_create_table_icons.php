@@ -17,21 +17,26 @@ class Migration_create_table_icons extends CI_Migration
 				),
 				"class" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"name" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"category" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);

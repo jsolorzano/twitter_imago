@@ -17,47 +17,58 @@ class Migration_create_table_twitter extends CI_Migration
 				),
 				"screen_name" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"name" => array(
 					"type" => "VARCHAR",
 					"constraint" => 100
+					"null" => TRUE
 				),
 				"location" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"url" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"description" => array(
 					"type" => "VARCHAR",
-					"constraint" => 250
+					"constraint" => 250,
+					"null" => TRUE
 				),
 				"followers_count" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"friends_count" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"listed_count" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"favorites_count" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"statuses_count" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"profile_image_url" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				)
 			)
 		);

@@ -17,17 +17,21 @@ class Migration_create_table_twitter_perfil extends CI_Migration
 				),
 				"perfil_id" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"twitter_id" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);

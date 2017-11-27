@@ -17,23 +17,28 @@ class Migration_create_table_tiendas extends CI_Migration
 				),
 				"rif" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"name" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"address" => array(
 					"type" => "VARCHAR",
-					"constraint" => 250
+					"constraint" => 250,
+					"null" => TRUE
 				),
 				"referencia" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"bd_externa" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"cp_externo" => array(
 					"type" => "VARCHAR",
@@ -41,17 +46,21 @@ class Migration_create_table_tiendas extends CI_Migration
 				),
 				"phone" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"status" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);
