@@ -20,7 +20,7 @@ class Migration_create_table_menus extends CI_Migration
 					"constraint" => 50
 				),
 				"description" => array(
-					"type" => "TEXT",,
+					"type" => "TEXT",
 					"null" => TRUE
 				),
 				"logo" => array(

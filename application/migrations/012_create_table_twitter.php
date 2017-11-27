@@ -22,7 +22,7 @@ class Migration_create_table_twitter extends CI_Migration
 				),
 				"name" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
 					"null" => TRUE
 				),
 				"location" => array(
