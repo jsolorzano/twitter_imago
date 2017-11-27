@@ -33,7 +33,11 @@ class CPerfil extends CI_Controller {
 	// Método para guardar un nuevo registro
     public function add() {
         
-        $data = array('name'=>$this->input->post('name'));
+        $data = array(
+			'name' => $this->input->post('name'),
+			'd_create' => date('Y-m-d H:i:s'),
+			'd_update' => date('Y-m-d H:i:s')
+		);
         
         $result = $this->MPerfil->insert($data);
         
@@ -43,11 +47,23 @@ class CPerfil extends CI_Controller {
 			// Proceso de registro de acciones asociadas al perfil
 			// Primero asociamos la acción por defecto (HOME)
 			$action_class = $this->MAcciones->obtenerAccionByClass('Home');
-			$data_action = array('profile_id'=>$result, 'action_id'=>$action_class[0]->id, 'parameter_permit'=>'777');
+			$data_action = array(
+				'profile_id'=>$result, 
+				'action_id'=>$action_class[0]->id, 
+				'parameter_permit'=>'777',
+				'd_create' => date('Y-m-d H:i:s'),
+				'd_update' => date('Y-m-d H:i:s')
+			);
 			$this->MPerfil->insert_action($data_action);
 			// Asociamos las acciones seleccionadas del combo select
 			foreach($this->input->post('actions_ids') as $action_id){
-				$data_action = array('profile_id'=>$result, 'action_id'=>$action_id, 'parameter_permit'=>'777');
+				$data_action = array(
+					'profile_id'=>$result, 
+					'action_id'=>$action_id, 
+					'parameter_permit'=>'777',
+					'd_create' => date('Y-m-d H:i:s'),
+					'd_update' => date('Y-m-d H:i:s')
+				);
 				$this->MPerfil->insert_action($data_action);
 			}
         }else{
@@ -79,7 +95,12 @@ class CPerfil extends CI_Controller {
 	// Método para actualizar
     public function update() {
 		
-		$data = array('id'=>$this->input->post('id'),'name'=>$this->input->post('name'));
+		$data = array(
+			'id'=>$this->input->post('id'),
+			'name'=>$this->input->post('name'),
+			'd_create' => date('Y-m-d H:i:s'),
+			'd_update' => date('Y-m-d H:i:s')
+		);
 		
         $result = $this->MPerfil->update($data);
         
@@ -94,7 +115,13 @@ class CPerfil extends CI_Controller {
 				$check_associated = $this->MPerfil->obtener_accion_ids($data['id'], $action_id);
 				//~ echo count($check_associated);
 				if(count($check_associated) == 0){
-					$data_action = array('profile_id'=>$data['id'], 'action_id'=>$action_id, 'parameter_permit'=>'777');
+					$data_action = array(
+						'profile_id'=>$data['id'], 
+						'action_id'=>$action_id, 
+						'parameter_permit'=>'777',
+						'd_create' => date('Y-m-d H:i:s'),
+						'd_update' => date('Y-m-d H:i:s')
+					);
 					$this->MPerfil->insert_action($data_action);
 				}
 				// Vamos colectando los ids recorridos
@@ -130,6 +157,8 @@ class CPerfil extends CI_Controller {
 					'profile_id' => $data['id'],
 					'action_id' => $campo['id'],
 					'parameter_permit' => $parameter,
+					'd_create' => date('Y-m-d H:i:s'),
+					'd_update' => date('Y-m-d H:i:s')
 				);
 				
 				// Actualizamos los permisos para la acción asociada
