@@ -17,55 +17,68 @@ class Migration_create_table_perfil extends CI_Migration
 				),
 				"cedula" => array(
 					"type" => "VARCHAR",
-					"constraint" => 10
+					"constraint" => 10,
+					"null" => TRUE
 				),
 				"genero" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"nombre" => array(
 					"type" => "VARCHAR",
-					"constraint" => 50
+					"constraint" => 50,
+					"null" => TRUE
 				),
 				"apellido" => array(
 					"type" => "VARCHAR",
-					"constraint" => 50
+					"constraint" => 50,
+					"null" => TRUE
 				),
 				"fecha_nac" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"direccion_nac" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"direccion_viv" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"telefono" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"celular" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"correo" => array(
 					"type" => "VARCHAR",
-					"constraint" => 50
+					"constraint" => 50,
+					"null" => TRUE
 				),
 				"centro_votacion" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"direccion_centro_votacion" => array(
 					"type" => "VARCHAR",
-					"constraint" => 200
+					"constraint" => 200,
+					"null" => TRUE
 				),
 				"facebook" => array(
 					"type" => "VARCHAR",
-					"constraint" => 50
+					"constraint" => 50,
+					"null" => TRUE
 				)
 			)
 		);

@@ -20,15 +20,18 @@ class Migration_create_table_submenus extends CI_Migration
 					"constraint" => 100
 				),
 				"description" => array(
-					"type" => "TEXT"
+					"type" => "TEXT",
+					"null" => TRUE
 				),
 				"logo" => array(
 					"type" => "VARCHAR",
-					"constraint" => 100
+					"constraint" => 100,
+					"null" => TRUE
 				),
 				"route" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 20,
+					"null" => TRUE
 				),
 				"menu_id" => array(
 					"type" => "INT",
@@ -39,10 +42,12 @@ class Migration_create_table_submenus extends CI_Migration
 					"constraint" => 11
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);

@@ -25,17 +25,21 @@ class Migration_create_table_actions extends CI_Migration
 				),
 				"route" => array(
 					"type" => "VARCHAR",
-					"constraint" => 50
+					"constraint" => 50,
+					"null" => TRUE
 				),
 				"assigned" => array(
 					"type" => "INT",
-					"constraint" => 11
+					"constraint" => 11,
+					"null" => TRUE
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);

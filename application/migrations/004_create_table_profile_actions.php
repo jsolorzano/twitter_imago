@@ -25,13 +25,16 @@ class Migration_create_table_profile_actions extends CI_Migration
 				),
 				"parameter_permit" => array(
 					"type" => "VARCHAR",
-					"constraint" => 5
+					"constraint" => 5,
+					"null" => TRUE
 				),
 				"d_create" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				),
 				"d_update" => array(
-					"type" => "TIMESTAMP"
+					"type" => "TIMESTAMP",
+					"null" => TRUE
 				)
 			)
 		);
