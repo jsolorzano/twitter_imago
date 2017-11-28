@@ -17,7 +17,7 @@ class Migration_create_table_time_line extends CI_Migration
 				),
 				"fecha" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20,
+					"constraint" => 100,
 					"null" => TRUE
 				),
 				"usuario" => array(

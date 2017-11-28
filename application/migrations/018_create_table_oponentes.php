@@ -30,7 +30,7 @@ class Migration_create_table_oponentes extends CI_Migration
 				),
 				"created_at" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20,
+					"constraint" => 100,
 					"null" => TRUE
 				),
 				"asignacion" => array(
