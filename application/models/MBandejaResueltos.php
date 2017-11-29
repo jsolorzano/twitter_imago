@@ -53,9 +53,12 @@ class MBandejaResueltos extends CI_Model {
         //~ $this->db->distinct();
 		$this->db->from($this->table);
 		$this->db->join('profile p', 'p.id = b_r.perfil_id');
-		$this->db->join('grupos_bandejas_perfiles g_b_p', 'g_b_p.perfil_id = p.id');
+		// Si el perfil corresponde al de un administrador quitamos el filtro de perfil
+        if($this->session->userdata('logged_in')['profile_id'] != 1){
+			$this->db->join('grupos_bandejas_perfiles g_b_p', 'g_b_p.perfil_id = p.id');
+			$this->db->where('p.id =', $profile_id);
+		}
         $this->db->where('b_r.status =', 1);
-        $this->db->where('p.id =', $profile_id);
 		if(isset($_POST["search"]["value"]) && $_POST["search"]["value"] != ""){
 			$condicionales_like = "(b_r.screen_name LIKE '%".$_POST["search"]["value"]."%' OR ";
 			$condicionales_like .= "b_r.id_str LIKE '%".$_POST["search"]["value"]."%' OR ";
@@ -94,9 +97,12 @@ class MBandejaResueltos extends CI_Model {
 		$this->db->select($this->select_column);
 		$this->db->from($this->table);
 		$this->db->join('profile p', 'p.id = b_r.perfil_id');
-		$this->db->join('grupos_bandejas_perfiles g_b_p', 'g_b_p.perfil_id = p.id');
+		// Si el perfil corresponde al de un administrador quitamos el filtro de perfil
+        if($this->session->userdata('logged_in')['profile_id'] != 1){
+			$this->db->join('grupos_bandejas_perfiles g_b_p', 'g_b_p.perfil_id = p.id');
+			$this->db->where('p.id =', $profile_id);
+		}
 		$this->db->where('b_r.status =', 1);
-		$this->db->where('p.id =', $profile_id);
 		return $this->db->count_all_results();
 	}
 	
