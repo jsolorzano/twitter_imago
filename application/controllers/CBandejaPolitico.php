@@ -33,7 +33,7 @@ class CBandejaPolitico extends CI_Controller {
 			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id_str.";".$row->status."'>";
 			$select .="<option value='0'>Seleccione</option>";
 			$select .="<option value='Oponente'>Oponente</option>";
-			$select .="<option value='Operante'>Operante</option>";
+			$select .="<option value='Operante'>Cooperante</option>";
 			$select .="</select>";
 			
 			$sub_array[] = "<a class='verId' title='Ver time-line'>".$row->id_str."</a>";
