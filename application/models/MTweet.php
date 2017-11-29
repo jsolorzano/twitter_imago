@@ -43,6 +43,7 @@ class MTweet extends CI_Model {
 		$this->db->join('bandeja_entrada b_e', 'b_e.id_str = t_l.tweet_id');
 		$this->db->join('users u', 'u.id = t_l.usuario');
         $this->db->where('t_l.tweet_id =', $tweet_id);
+        $this->db->order_by("t_l.id", "asc");
 		
 		$query = $this->db->get();
 		
