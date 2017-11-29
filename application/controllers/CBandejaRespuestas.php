@@ -59,7 +59,8 @@ class CBandejaRespuestas extends CI_Controller {
 	public function cambio_bandeja(){
 		
 		$id_tweet = $this->input->post('id');
-		$id_perfil = $this->input->post('id_perfil');
+		//~ $id_perfil = $this->input->post('id_perfil');
+		$id_perfil = $this->session->userdata('logged_in')['profile_id'];
 		$nueva_bandeja = $this->input->post('nueva_bandeja');
 		$mensaje = $this->input->post('mensaje');
 		
