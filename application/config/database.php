@@ -76,11 +76,11 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'postgres',
+	'username' => 'root',
 	'password' => '123456',
 	//~ 'database' => 'imago_m3',
 	'database' => 'twitter_imago',
-	'dbdriver' => 'postgre',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
