@@ -151,6 +151,18 @@ class MTwitter extends CI_Model {
             return $query->result();
             
     }
+    
+    // Método público para consultar los mensajes que ha recibido el twitter
+    public function obtenerMensajes($twitter_name) {
+		
+        $this->db->where('screen_name', $twitter_name);
+        $query = $this->db->get('mensajes_recibidos');
+        if ($query->num_rows() > 0)
+            return $query->result();
+        else
+            return $query->result();
+            
+    }
 	
 	// Método público para actualizar el estatus de un tweet en la bandeja de donde viene
     public function update_status($tabla, $datos) {

@@ -202,4 +202,11 @@ $(document).ready(function(){
 		
 	});
 	
+	// Función para levantar modal de envío de mensaje directo
+	$("#enviar_mensaje").on('click', function (e) {
+		
+		$("#modal_mensaje").modal('show');
+		
+	});
+	
 });
