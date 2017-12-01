@@ -21,7 +21,7 @@
 <!-- Campo oculto que almacena el url base del proyecto -->
 <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
 
-<!-- Cuerpo de la sección de perfil de twitter -->
+<!-- Cuerpo de la sección de cuenta de twitter -->
 <div class="wrapper wrapper-content animated fadeInUp">
 	<div class="row">
 		<div class="col-lg-12">
@@ -35,6 +35,12 @@
 							<a class="btn btn-primary btn-xs" href="https://twitter.com/<?php echo $screen_name; ?>" target="_blank">
 								<i class="fa fa-twitter"></i> Ver en Twitter
 							</a>
+						</div>
+						<div class="m-t-xs font-bold">
+							<a class="btn btn-primary btn-xs" id="enviar_mensaje">
+								<i class="fa fa-send"></i> Enviar mensaje
+							</a>
+							Recibidos: <span class="label label-info " title="<?php echo $num_mensajes?> mensajes"><?php echo $num_mensajes?></span>
 						</div>
 					</div>
 				</div>
@@ -96,8 +102,9 @@
 		</div>
 	</div>
 </div>
-<!-- Cierre del cuerpo de la sección de perfil de twitter -->
+<!-- Cierre del cuerpo de la sección de cuenta de twitter -->
 
+<!-- Cuerpo de la sección de perfiles asociados -->
 <div class="wrapper wrapper-content animated fadeInUp">
 
 	<div class="ibox">
@@ -192,6 +199,7 @@
 		</div>
 	</div>
 </div>
+<!-- Cierre del cuerpo de la sección de perfiles asociados -->
 
 <!-- Modal para indicar la cédula del usuario -->
 <div class="modal fade" id="modal_cedula">
@@ -236,6 +244,50 @@
    </div>
 </div>
 <!-- Cierre Modal para indicar la cédula del usuario -->
+
+<!-- Modal para envío de mensaje directo -->
+<div class="modal fade" id="modal_mensaje">
+   <div class="modal-dialog">
+	  <div class="modal-content">
+		 <div class="modal-header" style="background-color:#1ab394">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title" style="color:#ffffff">
+			   <center>
+				<span class="glyphicon glyphicon-search"></span>
+				&nbsp;Indique el mensaje a enviar
+			   </center>
+			</h4>
+		 </div>
+		 <div class="modal-body">
+			<form id="f_cedula" name="f_cedula" action="" method="post">
+			   <div class="form-group">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label style="font-weight:bold;">Mensaje</label>
+							<textarea class="form-control" id="mensaje"></textarea>
+							<input type="hidden" id="id_twitter" value="<?php echo $id; ?>">
+							<input type="hidden" id="screen_name_message" value="<?php echo $screen_name; ?>">
+							<input type="hidden" id="ruta_origen" value="<?php echo $ruta_origen; ?>">
+						</div>
+					</div>
+					</br></br>
+					</br></br>
+					<div class="col-sm-12" align="right">
+						<span class="input-btn">
+							<button class="btn btn-primary" type="button" id="enviar">
+								Enviar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+							</button>
+						</span>
+					</div>
+					</br></br>
+			   </div>
+			</form>
+		 </div>
+		 
+	  </div>
+   </div>
+</div>
+<!-- Cierre Modal para envío de mensaje directo -->
 
 <!-- FooTable -->
 <script src="<?php echo assets_url('js/plugins/footable/footable.all.min.js');?>"></script>
