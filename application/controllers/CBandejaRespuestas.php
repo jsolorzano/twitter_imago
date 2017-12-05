@@ -121,4 +121,15 @@ class CBandejaRespuestas extends CI_Controller {
 		}
 	}
 	
+	// Método para saber el número total de respuestas pendientes del usuario logueado
+	public function respuestas_pendientes(){
+		
+		$output = array(
+			"recordsTotal" => $this->MBandejaRespuestas->get_all_data($this->session->userdata('logged_in')['profile_id'])
+		);
+		
+		echo json_encode($output);
+		
+	}
+	
 }
