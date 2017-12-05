@@ -38,86 +38,66 @@ Class Basicauth
 				//~ $servicios = array();
 				$menus = array();
 				$submenus = array();
-				// Primero verificamos que el usuario no sea administrador
-				//if($query->row()->admin == 0){
-					//~ echo "Pasó 3";
-					// Buscamos si hay tiendas asociadas al usuario
-					$query_user_tienda = $this->CI->db->get_where('users_tiendas', array('user_id'=>$query->row()->id));
-					if($query_user_tienda->num_rows() > 0){
-						// Listamos las tiendas asociadas
-						$ids_serv = array();  // Variable para almacenar los ids de los servicios y filtrar los repetidos
-						foreach($query_user_tienda->result() as $tienda){
-							//~ print $tienda->tienda_id;
-							$query_tienda = $this->CI->db->get_where('tiendas', array('id'=>$tienda->tienda_id));
-							//~ print_r($query_tienda->result());
-							$tiendas[] = $query_tienda->result();
-							//~ // Buscamos los datos de los servicios asociados a la(s) tienda(s)
-							//~ $query_tienda_services = $this->CI->db->get_where('tiendas_services', array('franchise_id'=>$query_tienda->row()->id));
-							//~ if($query_tienda_services->num_rows() > 0){
-								//~ // Listamos los servicios asociados
-								//~ foreach($query_tienda_services->result() as $services){
-									//~ $query_servicio = $this->CI->db->get_where('services', array('id'=>$services->service_id));
-									//~ if(!in_array($query_servicio->row()->id, $ids_serv)){
-										//~ $servicios[] = $query_servicio->result();
-									//~ }
-									//~ $ids_serv[] = $query_servicio->row()->id;  // Vamos almacenando los ids de los servicios ya cargados
-								//~ }
-							//~ }
-						}
+				
+				// Buscamos si hay tiendas asociadas al usuario
+				$query_user_tienda = $this->CI->db->get_where('users_tiendas', array('user_id'=>$query->row()->id));
+				if($query_user_tienda->num_rows() > 0){
+					// Listamos las tiendas asociadas
+					$ids_serv = array();  // Variable para almacenar los ids de los servicios y filtrar los repetidos
+					foreach($query_user_tienda->result() as $tienda){
+						//~ print $tienda->tienda_id;
+						$query_tienda = $this->CI->db->get_where('tiendas', array('id'=>$tienda->tienda_id));
+						//~ print_r($query_tienda->result());
+						$tiendas[] = $query_tienda->result();
 					}
-					// Carga de menús y submenús para usuarios no administradores
-					$ids_acciones = array();  // Lista de ids de acciones para buscar en submenús
-					// Buscamos los submenús (acciones y permisos) asociados al usuario para armar la lista de acciones
-					foreach($acciones as $accion){
-						//~ print_r($accion);
-						$ids_acciones[] = $accion[0]->id;
+				}
+				
+				// Carga de menús y submenús para usuarios no administradores
+				$ids_acciones = array();  // Lista de ids de acciones para buscar en submenús
+				// Buscamos los submenús (acciones y permisos) asociados al usuario para armar la lista de acciones
+				foreach($acciones as $accion){
+					//~ print_r($accion);
+					$ids_acciones[] = $accion[0]->id;
+				}
+				foreach($permisos as $permiso){
+					//~ print_r($permiso);
+					$ids_acciones[] = $permiso[0]->id;
+				}
+				//~ print_r($ids_acciones);
+				// Buscamos los menús y submenús correspondientes a los ids de acciones
+				foreach($ids_acciones as $id_accion){
+					//~ echo $id_accion;
+					$query_submenus = $this->CI->db->get_where('submenus', array('action_id'=>$id_accion));
+					if($query_submenus->num_rows() > 0){
+						$submenus[] = $query_submenus->result();
 					}
-					foreach($permisos as $permiso){
-						//~ print_r($permiso);
-						$ids_acciones[] = $permiso[0]->id;
+					$query_menus = $this->CI->db->get_where('menus', array('action_id'=>$id_accion));
+					if($query_menus->num_rows() > 0){
+						$menus[] = $query_menus->result();
 					}
-					//~ print_r($ids_acciones);
-					// Buscamos los menús y submenús correspondientes a los ids de acciones
-					foreach($ids_acciones as $id_accion){
-						//~ echo $id_accion;
-						$query_submenus = $this->CI->db->get_where('submenus', array('action_id'=>$id_accion));
-						if($query_submenus->num_rows() > 0){
-							$submenus[] = $query_submenus->result();
-						}
-						$query_menus = $this->CI->db->get_where('menus', array('action_id'=>$id_accion));
-						if($query_menus->num_rows() > 0){
+				}
+				// Buscamos los menús correspondientes a los menu_id de la lista de submenús
+				$menu_names = array();  // Variable de apoyo para validar que no se repitan los menús
+				foreach($submenus as $submenu){
+					//~ echo $submenu[0]->menu_id;
+					$query_menus = $this->CI->db->get_where('menus', array('id'=>$submenu[0]->menu_id));
+					if($query_menus->num_rows() > 0){
+						if(!in_array($query_menus->result()[0]->name, $menu_names)){
+							$menu_names[] = $query_menus->result()[0]->name;
 							$menus[] = $query_menus->result();
 						}
 					}
-					// Buscamos los menús correspondientes a los menu_id de la lista de submenús
-					$menu_names = array();  // Variable de apoyo para validar que no se repitan los menús
-					foreach($submenus as $submenu){
-						//~ echo $submenu[0]->menu_id;
-						$query_menus = $this->CI->db->get_where('menus', array('id'=>$submenu[0]->menu_id));
-						if($query_menus->num_rows() > 0){
-							if(!in_array($query_menus->result()[0]->name, $menu_names)){
-								$menu_names[] = $query_menus->result()[0]->name;
-								$menus[] = $query_menus->result();
-							}
-						}
-					}
-				/*}else{
-					// Consultamos los datos de todas las acciones 
-					// (en este caso, el formato de captura de datos de acciones en sesión será diferente en el hook de acceso y el helper de menú, para lo cual habrá que hacer una validación en dichos archivos)
-					$acciones = array();
-					$query_actions = $this->CI->db->get('actions');
-					foreach($query_actions->result() as $action){
-						$acciones[] = $action;
-					}
-					// Carga de menús y submenús para usuarios administradores
-					// Menús
-					$query_menus = $this->CI->db->get('menus');
-					$menus[] = $query_menus->result();
-					// Submenús
-					$query_submenus = $this->CI->db->get('submenus');
-					$submenus[] = $query_submenus->result();
-				}*/
-				//~ exit();
+				}
+				
+				// Variable para indicar si el perfil del usuario logueado pertenece a algún grupo de bandejas
+				$group = 0;
+				
+				$query_group = $this->CI->db->get_where('grupos_bandejas_perfiles', array('perfil_id'=>$query->row()->profile_id));
+				
+				if($query_group->num_rows() > 0){
+					$group = $query_group->row()->grupo_bandeja_id;
+				}
+				
 				// Creamos la sesión y le cargamos los datos de usuario
 				$session_data = array(
 					'id' => $query->row()->id,
@@ -130,7 +110,8 @@ Class Basicauth
 					'tiendas' => $tiendas,
 					//~ 'servicios' => $servicios,
 					'submenus' => $submenus,
-					'menus' => $menus
+					'menus' => $menus,
+					'group' => $group
 				);
 				$this->CI->session->set_userdata('logged_in',$session_data);
 				

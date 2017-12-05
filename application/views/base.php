@@ -54,27 +54,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo assets_url('js/plugins/daterangepicker/daterangepicker.js');?>"></script>
 		<!-- Typehead -->
     <script src="<?php echo assets_url('js/plugins/typehead/bootstrap3-typeahead.min.js');?>"></script>
-    <script>
-		$(document).ready(function () {
-			// Aplicamos select2() a todos los combos select
-			$("select").select2();
-			
-			// Función añadida manualmente para alternar entre mini-barra y barra de menú completa u ocultar en dispositivos móviles
-			// .navbar-minimalize = clase del botón de acción
-			// .md-skin = clase de la etiqueta body asignada automáticamente por los plugins de la plantilla
-			$(".navbar-minimalize").on('click', function(){
-				var cadena1 = "md-skin fixed-nav no-skin-config pace-done pace-done";
-				var cadena1_small = "md-skin fixed-nav no-skin-config body-small pace-done pace-done";
-				var cadena2 = "md-skin fixed-nav no-skin-config pace-done pace-done mini-navbar";
-				var cadena2_small = "md-skin fixed-nav no-skin-config body-small pace-done pace-done mini-navbar";
-				if($(".md-skin").attr("class") == cadena1 || $(".md-skin").attr("class") == cadena1_small){
-					$(".md-skin").addClass("mini-navbar");
-				}else if($(".md-skin").attr("class") == cadena2 || $(".md-skin").attr("class") == cadena2_small){
-					$(".md-skin").removeClass("mini-navbar");
-				}
-			});
-		});
-	</script>
 </head>
 <body class="md-skin fixed-nav no-skin-config">
 	<div id="wrapper">
@@ -185,21 +164,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 								</li>
 							</ul>
-						</li>
-						<li class="dropdown">
+						</li>-->
+						
+						<li class="dropdown" id="li_respuestas" style="display:none;">
 							<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-								<i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+								<i class="fa fa-bell"></i> <span class="label label-warning" id="span_num_respuestas"></span>
 							</a>
 							<ul class="dropdown-menu dropdown-alerts">
 								<li>
-									<a href="mailbox.html">
+									<a href="<?php echo base_url(); ?>bandeja_respuestas">
 										<div>
-											<i class="fa fa-envelope fa-fw"></i> You have 16 messages
-											<span class="pull-right text-muted small">4 minutes ago</span>
+											<i class="fa fa-envelope fa-fw"></i> <span id="span_num_respuestas_text"></span>
+											<!--<span class="pull-right text-muted small">4 minutes ago</span>-->
 										</div>
 									</a>
 								</li>
-								<li class="divider"></li>
+								<!--<li class="divider"></li>
 								<li>
 									<a href="profile.html">
 										<div>
@@ -225,9 +205,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<i class="fa fa-angle-right"></i>
 										</a>
 									</div>
-								</li>
+								</li>-->
 							</ul>
-						</li>-->
+						</li>
 			
 			
 						<li>
@@ -239,6 +219,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 				</nav>
 			</div>
+			
+			<input type="hidden" value="<?php echo $this->session->userdata('logged_in')['group']; ?>" id="group_id">
+			
+			<script>
+				$(document).ready(function () {
+					// Aplicamos select2() a todos los combos select
+					$("select").select2();
+					
+					// Función añadida manualmente para alternar entre mini-barra y barra de menú completa u ocultar en dispositivos móviles
+					// .navbar-minimalize = clase del botón de acción
+					// .md-skin = clase de la etiqueta body asignada automáticamente por los plugins de la plantilla
+					$(".navbar-minimalize").on('click', function(){
+						var cadena1 = "md-skin fixed-nav no-skin-config pace-done pace-done";
+						var cadena1_small = "md-skin fixed-nav no-skin-config body-small pace-done pace-done";
+						var cadena2 = "md-skin fixed-nav no-skin-config pace-done pace-done mini-navbar";
+						var cadena2_small = "md-skin fixed-nav no-skin-config body-small pace-done pace-done mini-navbar";
+						if($(".md-skin").attr("class") == cadena1 || $(".md-skin").attr("class") == cadena1_small){
+							$(".md-skin").addClass("mini-navbar");
+						}else if($(".md-skin").attr("class") == cadena2 || $(".md-skin").attr("class") == cadena2_small){
+							$(".md-skin").removeClass("mini-navbar");
+						}
+					});
+				});
+				
+				// Ajax para contar la cantidad de respuestas pendientes del usuario logueado si éste pertenece a un grupo de bandejas
+				if($("#group_id").val() != "0"){
+					
+					$.post('<?php echo base_url(); ?>CBandejaRespuestas/respuestas_pendientes', function (response) {
+						
+						$("#span_num_respuestas").text(response['recordsTotal']);
+						$("#span_num_respuestas_text").text('Tienes '+response['recordsTotal']+' respuesta(s) pendiente(s)');
+						
+						if(parseInt(response['recordsTotal']) > 0){
+							$("#span_num_respuestas").removeClass('label-primary');
+							$("#span_num_respuestas").addClass('label-warning');
+						}else{
+							$("#span_num_respuestas").removeClass('label-warning');
+							$("#span_num_respuestas").addClass('label-primary');
+						}
+						
+					}, 'json');
+					
+					$("#li_respuestas").show();
+					
+				}
+				
+			</script>
 			
 		<!-- Validación de acciones -->
 		<?php echo validar_acciones(); ?>
