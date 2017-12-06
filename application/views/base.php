@@ -244,7 +244,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				});
 				
 				// Ajax para contar la cantidad de respuestas pendientes del usuario logueado si éste pertenece a un grupo de bandejas
-				if($("#group_id").val() != "0"){
+				//~ if($("#group_id").val() != "0"){
 					
 					$.post('<?php echo base_url(); ?>CBandejaRespuestas/respuestas_pendientes', function (response) {
 						
@@ -263,7 +263,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 					$("#li_respuestas").show();
 					
-				}
+				//~ }
 				
 			</script>
 			
