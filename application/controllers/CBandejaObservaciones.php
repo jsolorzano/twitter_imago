@@ -1,26 +1,30 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CBandejaAsistencial extends CI_Controller {
+class CBandejaObservaciones extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
+
+
        
 		// Load database
-        $this->load->model('MBandejaAsistencial');
+        $this->load->model('MBandejaObservaciones');
         $this->load->model('MBandejaEntrada');
 		
     }
 	
 	public function index(){
+		
 		$this->load->view('base');
-		$this->load->view('bandejas/bandeja_asistencial');
+		$this->load->view('bandejas/bandeja_observaciones');
 		$this->load->view('footer');
+		
 	}
 	
-	public function ajax_asistencial(){
+	public function ajax_observaciones(){
 		
-		$fetch_data = $this->MBandejaAsistencial->make_datatables();
+		$fetch_data = $this->MBandejaObservaciones->make_datatables();
 		//~ $consulta_ejecutada = $this->db->last_query();
 		//~ echo $consulta_ejecutada;
 		//~ echo count($fetch_data);
@@ -32,8 +36,13 @@ class CBandejaAsistencial extends CI_Controller {
 			// Proceso para la creación del combo select de asignación
 			$select = "<select class='form-control cambiar' style='width:100%' id='".$row->id_str.";".$row->status."'>";
 			$select .="<option value='0'>Seleccione</option>";
-			$select .="<option value='Individual'>Individual</option>";
-			$select .="<option value='Colectivo'>Colectivo</option>";
+			$select .="<option value='Entrada'>Entrada</option>";
+			$select .="<option value='Político'>Político</option>";
+			$select .="<option value='Asistencial'>Asistencial</option>";
+			$select .="<option value='Cooperantes'>Cooperantes</option>";
+			$select .="<option value='Oponentes'>Oponentes</option>";
+			$select .="<option value='Individuales'>Individuales</option>";
+			$select .="<option value='Colectivos'>Colectivos</option>";
 			$select .="</select>";
 			
 			$sub_array[] = "<a class='verId' title='Ver time-line'>".$row->id_str."</a>";
@@ -44,15 +53,15 @@ class CBandejaAsistencial extends CI_Controller {
 			$bot;
 			if($row->bot == 0){$bot = "No";}else{$bot = "<span style='color:#D33333;'>Sí</span>";}
 			$sub_array[] = $bot;
-			$sub_array[] = "<a class='observacion' id='".$row->id_str.";".$row->status."'><button class='btn btn-outline btn-primary dim' type='button'>Observación</button></a>";
 			
 			$data[] = $sub_array;
+			
 		}
 		
 		$output = array(
 			"draw" => intval($_POST["draw"]),
-			"recordsTotal" => $this->MBandejaAsistencial->get_all_data(),
-			"recordsFiltered" => $this->MBandejaAsistencial->get_filtered_data(),
+			"recordsTotal" => $this->MBandejaObservaciones->get_all_data(),
+			"recordsFiltered" => $this->MBandejaObservaciones->get_filtered_data(),
 			"data" => $data
 		);
 		
@@ -68,19 +77,31 @@ class CBandejaAsistencial extends CI_Controller {
 		$mensaje = $this->input->post('mensaje');
 		
 		// Comprobamos a qué tabla será movido el tweet
-		if($nueva_bandeja == "Individual"){
+		if($nueva_bandeja == "Entrada"){
+			$tabla = "bandeja_entrada";
+			$accion = "Asignado a bandeja entrada";
+		}else if($nueva_bandeja == "Político"){
+			$tabla = "bandeja_politico";
+			$accion = "Asignado a bandeja político";
+		}else if($nueva_bandeja == "Asistencial"){
+			$tabla = "bandeja_asistencial";
+			$accion = "Asignado a bandeja asistencial";
+		}else if($nueva_bandeja == "Cooperantes"){
+			$tabla = "bandeja_operantes";
+			$accion = "Asignado a bandeja cooperantes";
+		}else if($nueva_bandeja == "Oponentes"){
+			$tabla = "bandeja_oponentes";
+			$accion = "Asignado a bandeja oponentes";
+		}else if($nueva_bandeja == "Individuales"){
 			$tabla = "bandeja_individuales";
 			$accion = "Asignado a bandeja individuales";
-		}else if($nueva_bandeja == "Colectivo"){
+		}else if($nueva_bandeja == "Colectivos"){
 			$tabla = "bandeja_colectivos";
 			$accion = "Asignado a bandeja colectivos";
-		}else if($nueva_bandeja == "Observaciones"){
-			$tabla = "bandeja_observaciones";
-			$accion = "Asignado a bandeja observaciones";
 		}
 		
 		// Consultamos los datos del tweet correspondiente al id dado
-		$datos_tweet = $this->MBandejaAsistencial->obtenerTweet($id_tweet);
+		$datos_tweet = $this->MBandejaObservaciones->obtenerTweet($id_tweet);
 		
 		// Armamos los datos a registrar del tweet
 		$data = array(
@@ -93,23 +114,19 @@ class CBandejaAsistencial extends CI_Controller {
 			'status' => 1,
 		);
 		
-		if($nueva_bandeja == "Observaciones"){
-			$data['perfil_id'] = $this->session->userdata['logged_in']['profile_id'];
-		}
-		
 		// Registramos el tweet
 		$insert = $this->MBandejaEntrada->insert($tabla, $data);
 		
 		if($insert){
 			
-			// Actualizamos el status del tweet en la tabla 'bandeja_asistencial'
+			// Actualizamos el status del tweet en la tabla 'bandeja_observaciones'
 			$data2 = array(
 				'id_str' => $id_tweet,
 				'asignacion' => $nueva_bandeja,
 				'status' => 0
 			);
 			
-			$update = $this->MBandejaEntrada->update_status('bandeja_asistencial', $data2);
+			$update = $this->MBandejaEntrada->update_status('bandeja_observaciones', $data2);
 			
 			
 			// Registramos la acción en la tabla 'time_line'

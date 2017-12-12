@@ -44,6 +44,7 @@ class CBandejaPolitico extends CI_Controller {
 			$bot;
 			if($row->bot == 0){$bot = "No";}else{$bot = "<span style='color:#D33333;'>Sí</span>";}
 			$sub_array[] = $bot;
+			$sub_array[] = "<a class='observacion' id='".$row->id_str.";".$row->status."'><button class='btn btn-outline btn-primary dim' type='button'>Observación</button></a>";
 			
 			$data[] = $sub_array;
 		}
@@ -73,6 +74,9 @@ class CBandejaPolitico extends CI_Controller {
 		}else if($nueva_bandeja == "Operante"){
 			$tabla = "bandeja_operantes";
 			$accion = "Asignado a bandeja operantes";
+		}else if($nueva_bandeja == "Observaciones"){
+			$tabla = "bandeja_observaciones";
+			$accion = "Asignado a bandeja observaciones";
 		}
 		
 		// Consultamos los datos del tweet correspondiente al id dado
@@ -84,8 +88,14 @@ class CBandejaPolitico extends CI_Controller {
 			'id_str' => $datos_tweet[0]->id_str,
 			'text' => $datos_tweet[0]->text,
 			'created_at' => date('Y-m-d'),
+			'asignacion' => '',
+			'bot' => $datos_tweet[0]->bot,
 			'status' => 1,
 		);
+		
+		if($nueva_bandeja == "Observaciones"){
+			$data['perfil_id'] = $this->session->userdata['logged_in']['profile_id'];
+		}
 		
 		// Registramos el tweet
 		$insert = $this->MBandejaEntrada->insert($tabla, $data);
@@ -111,7 +121,7 @@ class CBandejaPolitico extends CI_Controller {
 				'tweet_id' => $id_tweet
 			);
 			
-			$time_line = $this->MBandejaEntrada->insert('time_line', $data_bitacora);
+			$time_line = $this->MBandejaEntrada->insert_time_line($data_bitacora);
 			
 			
 			if($update && $time_line){

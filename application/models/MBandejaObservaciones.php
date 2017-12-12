@@ -3,28 +3,28 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class MBandejaEntrada extends CI_Model {
+class MBandejaObservaciones extends CI_Model {
 	
-	var $table = "bandeja_entrada b_e";
+	var $table = "bandeja_observaciones b_o";
 	
 	var $select_column = array(
-		"b_e.id", 
-		"b_e.screen_name", 
-		"b_e.id_str", 
-		"b_e.text", 
-		"b_e.created_at", 
-		"b_e.asignacion",
-		"b_e.bot",
-		"b_e.status"
+		"b_o.id", 
+		"b_o.screen_name", 
+		"b_o.id_str", 
+		"b_o.text", 
+		"b_o.created_at", 
+		"b_o.asignacion",
+		"b_o.bot",
+		"b_o.status"
 	);
 	
 	var $order_column = array(
-		"b_e.screen_name", 
-		"b_e.id_str", 
-		"b_e.text", 
-		"b_e.created_at", 
-		"b_e.asignacion",
-		"b_e.bot"
+		"b_o.screen_name", 
+		"b_o.id_str", 
+		"b_o.text", 
+		"b_o.created_at", 
+		"b_o.asignacion",
+		"b_o.bot"
 	);
 
 
@@ -36,7 +36,7 @@ class MBandejaEntrada extends CI_Model {
 
     // Public method to obtain the twitters
     public function obtener() {
-        $query = $this->db->get('bandeja_entrada');
+        $query = $this->db->get('bandeja_observaciones');
 
         if ($query->num_rows() > 0)
             return $query->result();
@@ -49,14 +49,14 @@ class MBandejaEntrada extends CI_Model {
         $this->db->select($this->select_column);
         //~ $this->db->distinct();
 		$this->db->from($this->table);
-        $this->db->where('b_e.status =', 1);
+        $this->db->where('b_o.status =', 1);
 		if(isset($_POST["search"]["value"]) && $_POST["search"]["value"] != ""){
-			$condicionales_like = "(b_e.screen_name LIKE '%".$_POST["search"]["value"]."%' OR ";
-			$condicionales_like .= "b_e.id_str LIKE '%".$_POST["search"]["value"]."%' OR ";
-			$condicionales_like .= "b_e.text LIKE '%".$_POST["search"]["value"]."%' OR ";
-			$condicionales_like .= "b_e.created_at LIKE '%".$_POST["search"]["value"]."%' OR ";
-			$condicionales_like .= "b_e.asignacion LIKE '%".$_POST["search"]["value"]."%' OR ";
-			$condicionales_like .= "b_e.bot LIKE '%".$_POST["search"]["value"]."%')";
+			$condicionales_like = "(b_o.screen_name LIKE '%".$_POST["search"]["value"]."%' OR ";
+			$condicionales_like .= "b_o.id_str LIKE '%".$_POST["search"]["value"]."%' OR ";
+			$condicionales_like .= "b_o.text LIKE '%".$_POST["search"]["value"]."%' OR ";
+			$condicionales_like .= "b_o.created_at LIKE '%".$_POST["search"]["value"]."%' OR ";
+			$condicionales_like .= "b_o.asignacion LIKE '%".$_POST["search"]["value"]."%' OR ";
+			$condicionales_like .= "b_o.bot LIKE '%".$_POST["search"]["value"]."%')";
 			$this->db->where($condicionales_like);
 		}
 		if(isset($_POST["order"])){
@@ -87,30 +87,14 @@ class MBandejaEntrada extends CI_Model {
 	public function get_all_data(){
 		$this->db->select($this->select_column);
 		$this->db->from($this->table);
-		$this->db->where('b_e.status =', 1);
+		$this->db->where('b_o.status =', 1);
 		return $this->db->count_all_results();
 	}
 	
 	// Método público para registrar un tweet en una determinada tabla de bandeja x
     public function insert($tabla, $datos) {
-		
-		$result = $this->db->where('id_str =', $datos['id_str']);
-        $result = $this->db->get($tabla);
-        if ($result->num_rows() > 0) {
-            $result = $this->db->where('id_str', $datos['id_str']);
-			$result = $this->db->update($tabla, $datos);
-			return $result;
-        } else {
-            $result = $this->db->insert($tabla, $datos);
-			return $result;
-        }
-            
-    }
-	
-	// Método público para registrar un movimiento en el time line
-    public function insert_time_line($datos) {
-		
-		$result = $this->db->insert('time_line', $datos);
+        
+		$result = $this->db->insert($tabla, $datos);
 		return $result;
             
     }
@@ -118,7 +102,7 @@ class MBandejaEntrada extends CI_Model {
     // Método público para consultar los datos de un tweet según su id
     public function obtenerTweet($tweet_id) {
         $this->db->where('id_str', $tweet_id);
-        $query = $this->db->get('bandeja_entrada');
+        $query = $this->db->get('bandeja_observaciones');
         if ($query->num_rows() > 0)
             return $query->result();
         else
