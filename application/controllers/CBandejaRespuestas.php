@@ -105,7 +105,7 @@ class CBandejaRespuestas extends CI_Controller {
 				'tweet_id' => $id_tweet
 			);
 			
-			$time_line = $this->MBandejaEntrada->insert('time_line', $data_bitacora);
+			$time_line = $this->MBandejaEntrada->insert_time_line($data_bitacora);
 			
 			
 			if($update && $time_line){

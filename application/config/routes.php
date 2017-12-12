@@ -149,6 +149,11 @@ $route['respuestas/cambiar_bandeja'] = 'CBandejaRespuestas/cambio_bandeja';
 $route['bandeja_resueltos'] = 'CBandejaResueltos/index';
 $route['resueltos_json'] = 'CBandejaResueltos/ajax_resueltos';
 
+/*   Bandeja de observaciones */
+$route['bandeja_observaciones'] = 'CBandejaObservaciones/index';
+$route['observaciones_json'] = 'CBandejaObservaciones/ajax_observaciones';
+$route['observaciones/cambiar_bandeja'] = 'CBandejaObservaciones/cambio_bandeja';
+
 /*   Perfil de Twitter */
 $route['twitters'] = 'CTwitter/index';
 $route['twitters_json'] = 'CTwitter/ajax_twitters';

@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Bandeja de entrada</h2>
+        <h2>Bandeja de observaciones</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="<?php echo base_url() ?>home">Inicio</a>
             </li>
             <li class="active">
-                <strong>Bandeja de entrada</strong>
+                <strong>Bandeja de observaciones</strong>
             </li>
         </ol>
     </div>
@@ -16,12 +16,12 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Bandeja de entrada </h5>
+                    <h5>Bandeja de observaciones </h5>
                     <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <table id="tab_entradas" class="table table-striped table-bordered dt-responsive table-hover dataTables-example" >
+                        <table id="tab_observaciones" class="table table-striped table-bordered dt-responsive table-hover dataTables-example" >
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -30,7 +30,6 @@
                                     <th>Fecha</th>
                                     <th>Asignación</th>
                                     <th>Bot</th>
-                                    <th>Observación</th>
                                 </tr>
                             </thead>
 							
@@ -77,9 +76,6 @@
 							<button class="btn btn-primary" type="button" id="asignar">
 								Asignar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
 							</button>
-							<button class="btn btn-primary" type="button" id="observar">
-								Observar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
-							</button>
 						</span>
 					</div>
 					</br></br>
@@ -93,4 +89,4 @@
 <!-- Cierre Modal para descripción del movimiento -->
 
  <!-- Page-Level Scripts -->
-<script src="<?php echo assets_url(); ?>script/bandeja_entradas.js"></script>
+<script src="<?php echo assets_url(); ?>script/bandeja_observaciones.js"></script>

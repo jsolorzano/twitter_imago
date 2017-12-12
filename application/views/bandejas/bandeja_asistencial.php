@@ -30,6 +30,7 @@
                                     <th>Fecha</th>
                                     <th>Asignación</th>
                                     <th>Bot</th>
+                                    <th>Observación</th>
                                 </tr>
                             </thead>
 							
@@ -75,6 +76,9 @@
 						<span class="input-btn">
 							<button class="btn btn-primary" type="button" id="asignar">
 								Asignar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+							</button>
+							<button class="btn btn-primary" type="button" id="observar">
+								Observar&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
 							</button>
 						</span>
 					</div>

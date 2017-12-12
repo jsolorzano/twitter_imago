@@ -49,6 +49,7 @@ class CBandejaOperantes extends CI_Controller {
 			if($row->bot == 0){$bot = "No";}else{$bot = "<span style='color:#D33333;'>Sí</span>";}
 			$sub_array[] = $bot;
 			$sub_array[] = $select;
+			$sub_array[] = "<a class='observacion' id='".$row->id_str.";".$row->status."'><button class='btn btn-outline btn-primary dim' type='button'>Observación</button></a>";
 			
 			$data[] = $sub_array;
 		}
@@ -72,9 +73,14 @@ class CBandejaOperantes extends CI_Controller {
 		$nueva_bandeja = $this->input->post('nueva_bandeja');
 		$mensaje = $this->input->post('mensaje');
 		
-		// Indicamos a qué tabla será movido el tweet
-		$tabla = "bandeja_respuestas";
-		$accion = "Asignado a bandeja de respuestas";
+		// Comprobamos a qué tabla será movido el tweet
+		if($nueva_bandeja == "Respuestas"){
+			$tabla = "bandeja_respuestas";
+			$accion = "Asignado a bandeja de respuestas";
+		}else if($nueva_bandeja == "Observaciones"){
+			$tabla = "bandeja_observaciones";
+			$accion = "Asignado a bandeja observaciones";
+		}
 		
 		// Consultamos los datos del tweet correspondiente al id dado
 		$datos_tweet = $this->MBandejaOperantes->obtenerTweet($id_tweet);
@@ -85,9 +91,16 @@ class CBandejaOperantes extends CI_Controller {
 			'id_str' => $datos_tweet[0]->id_str,
 			'text' => $datos_tweet[0]->text,
 			'created_at' => date('Y-m-d'),
-			'status' => 1,
-			'perfil_id' => $id_perfil
+			'asignacion' => '',
+			'bot' => $datos_tweet[0]->bot,
+			'status' => 1
 		);
+		
+		if($nueva_bandeja == "Observaciones"){
+			$data['perfil_id'] = $this->session->userdata['logged_in']['profile_id'];
+		}else{
+			$data['perfil_id'] = $id_perfil;
+		}
 		
 		// Registramos el tweet
 		$insert = $this->MBandejaEntrada->insert($tabla, $data);
@@ -113,7 +126,7 @@ class CBandejaOperantes extends CI_Controller {
 				'tweet_id' => $id_tweet
 			);
 			
-			$time_line = $this->MBandejaEntrada->insert('time_line', $data_bitacora);
+			$time_line = $this->MBandejaEntrada->insert_time_line($data_bitacora);
 			
 			
 			if($update && $time_line){
