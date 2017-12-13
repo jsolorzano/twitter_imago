@@ -29,8 +29,18 @@ class CAcciones extends CI_Controller {
 	
 	  //Método para guardar un nuevo registro
     public function add() {
-
-        $result = $this->MAcciones->insert($this->input->post());
+		
+		$data = array(
+			'name' => $this->input->post('name'),
+			'class' => $this->input->post('class'),
+			'route' => $this->input->post('route'),
+			'assigned' => 0,
+			'd_create' => date('Y-m-d')." ".date("H:i:s"),
+			'd_update' => date('Y-m-d')." ".date("H:i:s")
+		);
+		
+        $result = $this->MAcciones->insert($data);
+        
         if ($result) {
 
            /*$this->libreria->generateActivity('Nuevo Grupo de Usuario', $this->session->userdata('logged_in')['id']);*/

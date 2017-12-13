@@ -30,7 +30,7 @@ class Migration_create_table_menus extends CI_Migration
 				),
 				"route" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20,
+					"constraint" => 50,
 					"null" => TRUE
 				),
 				"action_id" => array(

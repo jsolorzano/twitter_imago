@@ -50,7 +50,6 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
-								<input class="form-control"  type='hidden' id="id" name="id" value=""/>
 								<button class="btn btn-white" id="volver" type="button">Volver</button>
 								<button class="btn btn-primary" id="registrar" type="submit">Guardar</button>
 							</div>
