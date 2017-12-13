@@ -30,6 +30,7 @@
                                     <th>Fecha</th>
                                     <th>Asignación</th>
                                     <th>Bot</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
 							

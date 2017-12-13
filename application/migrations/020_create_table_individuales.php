@@ -25,7 +25,7 @@ class Migration_create_table_individuales extends CI_Migration
 				),
 				"text" => array(
 					"type" => "VARCHAR",
-					"constraint" => 250,
+					"constraint" => 300,
 					"null" => TRUE
 				),
 				"created_at" => array(
