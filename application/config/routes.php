@@ -153,6 +153,7 @@ $route['resueltos_json'] = 'CBandejaResueltos/ajax_resueltos';
 $route['bandeja_observaciones'] = 'CBandejaObservaciones/index';
 $route['observaciones_json'] = 'CBandejaObservaciones/ajax_observaciones';
 $route['observaciones/cambiar_bandeja'] = 'CBandejaObservaciones/cambio_bandeja';
+$route['observaciones/eliminar'] = 'CBandejaObservaciones/eliminar';
 
 /*   Perfil de Twitter */
 $route['twitters'] = 'CTwitter/index';

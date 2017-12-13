@@ -53,6 +53,7 @@ class CBandejaObservaciones extends CI_Controller {
 			$bot;
 			if($row->bot == 0){$bot = "No";}else{$bot = "<span style='color:#D33333;'>Sí</span>";}
 			$sub_array[] = $bot;
+			$sub_array[] = "<a class='eliminar' style='color: #1ab394' id='".$row->id_str.";".$row->status."'><i class='fa fa-trash-o fa-2x'></i>";
 			
 			$data[] = $sub_array;
 			
@@ -152,6 +153,45 @@ class CBandejaObservaciones extends CI_Controller {
 			echo '{"response":"error"}';
 			
 		}
+	}
+	
+	// Método para cambiar el status de una observación a 0 (cero)
+	public function eliminar(){
+		
+		$id_tweet = $this->input->post('id');
+		
+		// Actualizamos el status del tweet en la tabla 'bandeja_observaciones'
+		$data2 = array(
+			'id_str' => $id_tweet,
+			'asignacion' => 'Eliminado',
+			'status' => 0
+		);
+		
+		$update = $this->MBandejaEntrada->update_status('bandeja_observaciones', $data2);
+		
+		
+		// Registramos la acción en la tabla 'time_line'
+		$data_bitacora = array(
+			'fecha' => date('Y-m-d H:i:s'),
+			'usuario' => $this->session->userdata('logged_in')['id'],
+			'mensaje' => 'Eliminado por el usuario '.$this->session->userdata('logged_in')['username'],
+			'accion' => 'Eliminado por el usuario '.$this->session->userdata('logged_in')['username'],
+			'tweet_id' => $id_tweet
+		);
+		
+		$time_line = $this->MBandejaEntrada->insert_time_line($data_bitacora);
+		
+		
+		if($update && $time_line){
+			
+			echo '{"response":"ok"}';
+			
+		}else{
+		
+			echo '{"response":"error"}';
+			
+		}
+		
 	}
 	
 }

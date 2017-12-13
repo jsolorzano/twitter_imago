@@ -33,6 +33,7 @@ $(document).ready(function(){
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "10%"},
             {"sWidth": "9%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
+            {"sWidth": "3%", "sClass": "registro center"},
             {"sWidth": "3%", "sClass": "registro center"}
         ]
     });
@@ -118,6 +119,68 @@ $(document).ready(function(){
 			}, 'json');
 		
 		}		
+		
+	});
+	
+	// Función para cambiar un twitter a otra bandeja según la opción seleccionada en su respectivo combo
+	$("table#tab_observaciones").on('click', 'a.eliminar', function (e) {
+		
+		e.preventDefault();
+		
+		var id = this.getAttribute('id');
+		id = id.split(";");
+		id = id[0];  // Id de la cola
+		var estatus_actual = this.getAttribute('id');
+		estatus_actual = estatus_actual.split(";");
+		estatus_actual = estatus_actual[1];  // Estatus actual de la cola
+		
+		//~ alert("Id: "+id);
+		
+		swal({
+            title: "Eliminar observación",
+            text: "¿Está seguro de eliminar la observación?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+        function(isConfirm){
+			
+            if (isConfirm) {
+             
+                $.post(base_url+'observaciones/eliminar', {'id':id}, function (response) {
+					
+					if (response['response'] == "error") {
+				   
+						swal({
+							title: "Disculpe,",
+							text: "Ha ocurrido un error durante la eliminación, por favor contacte con su administrador.",
+							type: "warning" 
+						},
+						function(){
+							// Si hay algún error, fijamos el select al estatus inicial
+							//~ select_actual.val('0');
+						});
+						
+					}else{
+						 swal({ 
+						   title: "Eliminación completada",
+							text: "Observación eliminada con éxito",
+							 type: "success" 
+						   },
+						   function(){
+							 window.location.href = base_url+'bandeja_observaciones';
+						 });
+					}
+					
+				});
+                
+            }
+            
+        });
 		
 	});
 	
