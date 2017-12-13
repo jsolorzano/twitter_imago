@@ -21,7 +21,7 @@ class Migration_create_table_actions extends CI_Migration
 				),
 				"class" => array(
 					"type" => "VARCHAR",
-					"constraint" => 20
+					"constraint" => 50
 				),
 				"route" => array(
 					"type" => "VARCHAR",
