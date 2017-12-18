@@ -353,4 +353,69 @@ $(document).ready(function(){
 		
 	});
 	
+	// Borrado general de observaciones
+	$("#borrar_todo").on('click', function (e) {
+		swal({
+			title: "Eliminar observaciones",
+			text: "¿Está seguro de borrar todas las observaciones?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Borrar",
+			cancelButtonText: "Cancelar",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		  },
+		function(isConfirm){
+			if (isConfirm) {
+				
+				var data = [];  // Arreglo para ids de observaciones a borrar
+				// Recorremos la tabla para verificar qué registros están marcados y proceder a incluirlos en el arreglo
+				$("#tab_observaciones tbody tr").each(function () {
+					var checkbox;
+					checkbox = $(this).find('td').eq(0).find('input');
+					
+					var id = $(this).find('a.eliminar').attr('id');
+					id = id.split(';');
+					id = id[0];
+					
+					data.push(id);
+				});
+				
+				console.log(data);
+				
+				$.ajax({
+					url : base_url+'CBandejaObservaciones/eliminar_multi',
+					type : 'POST',
+					async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
+					//~ dataType : 'json',
+					data : {'observaciones': data},
+					beforeSend:function(objeto){
+						$('#borrar_todo').prop('disabled',true);
+						$('#borrar_seleccion').prop('disabled',true);
+					},
+					success : function(response) {
+						
+						$('#resultado').css({display:'none'});
+						$('#agregar').prop('disabled',false);
+						$('#referenciar').prop('disabled',false);
+						swal({
+							title: "Borrado",
+							 text: "Borrado con exito",
+							  type: "success" 
+							},
+						function(){
+							// Reiniciamos
+							window.location.href = base_url+'bandeja_observaciones';
+						});
+														
+					},
+				});
+				
+			}
+			
+		});  // Cierre del confirm
+		
+	});
+	
 });
