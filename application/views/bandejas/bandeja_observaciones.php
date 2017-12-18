@@ -17,13 +17,16 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Bandeja de observaciones </h5>
-                    <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
+                    <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">                    
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
+						<button class="btn btn-outline btn-primary dim" id="borrar_todo" type="button"><i class='fa fa-trash-o fa-1x'></i> Borrar todo </button>
+						<button class="btn btn-outline btn-primary dim" id="borrar_seleccion" type="button"><i class='fa fa-trash-o fa-1x'></i> Borrar selección </button>
                         <table id="tab_observaciones" class="table table-striped table-bordered dt-responsive table-hover dataTables-example" >
                             <thead>
                                 <tr>
+									<th><input type="checkbox" id="check_all"></th>
                                     <th>#</th>
                                     <th>Solicitante</th>
                                     <th>Mensaje</th>
