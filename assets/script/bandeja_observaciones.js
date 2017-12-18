@@ -29,6 +29,7 @@ $(document).ready(function(){
         "oLanguage": {"sUrl": base_url+"assets/js/es.txt"},
         "aoColumns": [
             {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
+            {"sWidth": "3%", "bSortable": false, "sClass": "center sorting_false", "bSearchable": false},
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "20%"},
             {"sClass": "registro center", "sWidth": "10%"},
@@ -217,6 +218,138 @@ $(document).ready(function(){
 		$("#screen_name").val('');
 		
 		window.location.href = base_url+'time_line/time_line?id_str='+$("#id_str").val()+'&ruta='+$("#ruta_origen").val();
+		
+	});
+	
+	
+	// FUNCIONES DE BORRADO MÚLTIPLE
+	
+	// Función para marcar/desmarcar todos los inputs
+	$("table#tab_observaciones").on('change', 'input#check_all', function (e) {
+		e.preventDefault();
+		
+		var check = $(this);
+		
+		var accion = '';
+		if (check.is(':checked')) {
+            accion = 'marcar';
+            check.prop("checked", "checked");  // Marcamos nuevamente el checkbox
+            // Recorremos la tabla marcando todos los checkbox
+            $("#tab_observaciones tbody tr").each(function () {
+				$(this).find('td').find('input').prop("checked", "checked");
+			});
+        }else{
+			accion = 'desmarcar';
+			check.prop("checked", "");  // Desmarcamos nuevamente el checkbox
+			// Recorremos la tabla desmarcando todos los checkbox
+            $("#tab_observaciones tbody tr").each(function () {
+				$(this).find('td').find('input').prop("checked", "");
+			});
+		}
+	});
+	
+	// Función para marcar/desmarcar un input seleccionado
+	$("table#tab_observaciones").on('change', 'input.check', function (e) {
+		e.preventDefault();
+        var id = this.getAttribute('id');
+		
+        var check = $(this);
+		
+		var accion = '';
+		if (check.is(':checked')) {
+            accion = 'marcar';
+            check.prop("checked", "checked");  // Marcamos nuevamente el checkbox
+        }else{
+			accion = 'desmarcar';
+			//~ alert(accion);
+			check.prop("checked", "");  // Desmarcamos nuevamente el checkbox
+		}
+	});
+	
+	// Proceso de borrado de observaciones seleccionadas
+	$("#borrar_seleccion").on('click', function (e) {
+		var num_checked = 0;  // Contador de checkbox marcados
+		
+		// Recorremos la tabla para contar los registros marcados
+		$("#tab_observaciones tbody tr").each(function () {
+			var checkbox;
+			checkbox = $(this).find('td').eq(0).find('input');
+			
+			if (checkbox.is(':checked')) {
+				num_checked += 1;
+			}
+		});
+		
+		if (num_checked == 0) {
+			swal("Disculpe,", "no ha marcado ningún elemento de la lista");
+			$('#resultado').css({display:'none'});
+			$('#agregar').prop('disabled',false);
+			$('#referenciar').prop('disabled',false);
+		}else{
+		
+			swal({
+				title: "Eliminar observaciones",
+				text: "¿Está seguro de borrar las observaciones seleccionadas?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Borrar",
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			  },
+			function(isConfirm){
+				if (isConfirm) {
+					
+					var data = [];  // Arreglo para ids de observaciones a borrar
+					// Recorremos la tabla para verificar qué registros están marcados y proceder a incluirlos en el arreglo
+					$("#tab_observaciones tbody tr").each(function () {
+						var checkbox;
+						checkbox = $(this).find('td').eq(0).find('input');
+						
+						if (checkbox.is(':checked')) {
+							var id = $(this).find('a.eliminar').attr('id');
+							id = id.split(';');
+							id = id[0];
+							
+							data.push(id);
+						}
+					});
+					
+					console.log(data);
+					
+					$.ajax({
+						url : base_url+'CBandejaObservaciones/eliminar_multi',
+						type : 'POST',
+						async: false,  // Para que no proceda con las siguientes instrucciones hasta terminar la petición
+						//~ dataType : 'json',
+						data : {'observaciones': data},
+						beforeSend:function(objeto){
+							$('#borrar_todo').prop('disabled',true);
+							$('#borrar_seleccion').prop('disabled',true);
+						},
+						success : function(response) {
+							
+							$('#resultado').css({display:'none'});
+							$('#agregar').prop('disabled',false);
+							$('#referenciar').prop('disabled',false);
+							swal({
+								title: "Borrado",
+								 text: "Borrado con exito",
+								  type: "success" 
+								},
+							function(){
+								// Reiniciamos
+								window.location.href = base_url+'bandeja_observaciones';
+							});
+															
+						},
+					});
+					
+				}
+			});  // Cierre del confirm
+			
+		}  // Cierre del if que valida si hay checkbox marcados
 		
 	});
 	

@@ -45,6 +45,7 @@ class CBandejaObservaciones extends CI_Controller {
 			$select .="<option value='Colectivos'>Colectivos</option>";
 			$select .="</select>";
 			
+			$sub_array[] = "<input type='checkbox' id='checkbox_".$row->id."' class='check'>";
 			$sub_array[] = "<a class='verId' title='Ver time-line'>".$row->id_str."</a>";
 			$sub_array[] = "<a class='verName' title='Detalles de cuenta'>".$row->screen_name."</a>";
 			$sub_array[] = "<a class='verText' title='Ver time-line' id='".$row->id_str."'>".$row->text."</a>";
@@ -189,6 +190,53 @@ class CBandejaObservaciones extends CI_Controller {
 		}else{
 		
 			echo '{"response":"error"}';
+			
+		}
+		
+	}
+	
+	// Método para cambiar el status de una observación a 0 (cero)
+	public function eliminar_multi(){
+		
+		$observaciones = $this->input->post('observaciones');
+		
+		// Si el arreglo trae registros se procede a hacer los registros correspondientes
+		if(count($observaciones) > 0){
+			foreach ($observaciones as $observacion) {
+					
+				// Actualizamos el status del tweet en la tabla 'bandeja_observaciones'
+				$data2 = array(
+					'id_str' => $observacion,
+					'asignacion' => 'Eliminado',
+					'status' => 0
+				);
+				
+				$update = $this->MBandejaEntrada->update_status('bandeja_observaciones', $data2);
+				
+				
+				// Registramos la acción en la tabla 'time_line'
+				$data_bitacora = array(
+					'fecha' => date('Y-m-d H:i:s'),
+					'usuario' => $this->session->userdata('logged_in')['id'],
+					'mensaje' => 'Eliminado por el usuario '.$this->session->userdata('logged_in')['username'],
+					'accion' => 'Eliminado por el usuario '.$this->session->userdata('logged_in')['username'],
+					'tweet_id' => $observacion
+				);
+				
+				$time_line = $this->MBandejaEntrada->insert_time_line($data_bitacora);
+				
+				
+				if($update && $time_line){
+					
+					echo '{"response":"ok"}';
+					
+				}else{
+				
+					echo '{"response":"error"}';
+					
+				}
+				
+			}
 			
 		}
 		
